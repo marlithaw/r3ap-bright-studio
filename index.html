@@ -6,24 +6,32 @@
   <title>R³ Agency Practice | Bright Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Jost:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAFAFA;
-      --paper: #FFFFFF;
-      --ink: #111827;
-      --ink-soft: #4B5563;
-      --line: #E5E7EB;
-      --line-strong: #111827;
-      --accent: #FF4500; /* Sharp, energetic vermilion */
-      --accent-soft: #FFF0EB;
-      --teal: #0F766E;
-      --radius-xl: 0px; /* Sharp corners for editorial feel */
-      --radius-lg: 0px;
-      --radius-md: 0px;
-      --radius-sm: 0px;
-      --border-thick: 2px solid var(--ink);
-      --border-thin: 1px solid var(--ink);
+      --bg: #f6f1e8;
+      --paper: #fffaf2;
+      --paper-2: #f8efe1;
+      --paper-3: #eef7f6;
+      --ink: #143748;
+      --ink-soft: #5e7480;
+      --line: #d7cbbb;
+      --line-strong: #a7c8c4;
+      --teal: #155e63;
+      --teal-deep: #0d444e;
+      --orange: #ff7a00;
+      --orange-deep: #c95d05;
+      --orange-soft: #fff0df;
+      --gold: #f1c95e;
+      --sky: #dcecf0;
+      --green: #3f8566;
+      --good: #2f9e69;
+      --bad: #c95d54;
+      --shadow: 0 28px 60px -34px rgba(13, 68, 78, 0.32);
+      --radius-xl: 36px;
+      --radius-lg: 26px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
     }
 
     * { box-sizing: border-box; }
@@ -32,574 +40,444 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Inter", sans-serif;
+      font-family: "Jost", sans-serif;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(255, 122, 0, 0.13), transparent 28%),
+        radial-gradient(circle at right 15%, rgba(21, 94, 99, 0.12), transparent 25%),
+        linear-gradient(180deg, #fbf7f0 0%, #f4efe6 100%);
       position: relative;
-      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 250, 242, 0.93), rgba(255, 250, 242, 0.96)),
+        radial-gradient(circle at 18% 25%, rgba(255, 122, 0, 0.22), transparent 18%),
+        radial-gradient(circle at 78% 30%, rgba(21, 94, 99, 0.2), transparent 22%),
+        linear-gradient(135deg, rgba(220, 236, 240, 0.65), rgba(248, 239, 225, 0.72));
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: -1;
     }
 
     button, input, textarea { font: inherit; }
     button { cursor: pointer; border: 0; background: none; color: inherit; }
     img { display: block; max-width: 100%; }
-
-    h1, h2, h3, h4, .display {
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      margin: 0;
-      letter-spacing: -0.03em;
-    }
-
     .shell { min-height: 100vh; }
 
-    /* --- TOPBAR --- */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: var(--paper);
-      border-bottom: var(--border-thin);
+      backdrop-filter: blur(14px);
+      background: rgba(255, 250, 242, 0.88);
+      border-bottom: 1px solid rgba(21, 94, 99, 0.12);
     }
 
     .topbar-inner {
-      width: min(1240px, calc(100vw - 40px));
+      width: min(1240px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 16px 0;
-      display: flex;
-      justify-content: space-between;
+      padding: 18px 0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
     }
 
-    .brand-lockup {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .brand-lockup { display: flex; align-items: center; gap: 14px; }
     .brand-dot {
-      width: 16px;
-      height: 16px;
-      background: var(--accent);
-      border: var(--border-thin);
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      box-shadow: 0 0 0 6px rgba(255, 122, 0, 0.14);
+      flex-shrink: 0;
     }
 
-    .brand-text { display: flex; flex-direction: column; }
-    
-    .brand-title {
-      font-size: 1.5rem;
-      text-transform: uppercase;
-    }
+    .brand-text { display: flex; flex-direction: column; gap: 3px; }
+    .brand-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.04em; }
+    .brand-title span { color: var(--orange); font-size: 1rem; letter-spacing: 0.02em; }
+    .brand-sub { font-family: "DM Mono", monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
 
-    .brand-sub {
-      font-family: "DM Mono", monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .nav-row { display: flex; gap: 8px; flex-wrap: wrap; }
-
+    .nav-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
     .nav-button {
-      padding: 8px 16px;
-      border: var(--border-thin);
-      background: transparent;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--ink-soft);
+      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     }
-
-    .nav-button:hover {
-      background: var(--line);
-    }
-
+    .nav-button:hover { transform: translateY(-1px); background: rgba(21, 94, 99, 0.06); color: var(--ink); }
     .nav-button.is-active {
-      background: var(--ink);
-      color: var(--paper);
+      background: var(--teal);
+      color: #fff;
+      border-color: var(--teal);
+      box-shadow: 0 16px 30px -24px rgba(21, 94, 99, 0.8);
     }
 
     .status-pod {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 6px 16px;
-      border: var(--border-thin);
-      background: var(--paper);
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(21, 94, 99, 0.08);
+      border: 1px solid rgba(21, 94, 99, 0.12);
+      color: var(--ink);
     }
+    .status-pill { font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange-deep); }
+    .status-copy { font-size: 0.95rem; font-weight: 600; }
 
-    .status-pill {
-      font-family: "DM Mono", monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .status-copy { font-size: 0.9rem; font-weight: 600; }
-
-    /* --- LAYOUT --- */
-    .main-shell {
-      width: min(1240px, calc(100vw - 40px));
-      margin: 0 auto;
-      padding: 40px 0 96px;
-    }
-
-    .screen {
-      display: grid;
-      gap: 40px;
-      animation: rise 0.4s ease;
-    }
+    .main-shell { width: min(1240px, calc(100vw - 28px)); margin: 0 auto; padding: 28px 0 96px; }
+    .screen { display: grid; gap: 24px; animation: rise 0.38s ease; }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- COMPONENTS --- */
-    .hero-card {
-      background: var(--paper);
-      border: var(--border-thick);
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
+    .hero-card, .panel, .track-card, .quick-card, .day-card, .ladder-rung, .scenario-card, .lens-card, .reflection-card, .quote-band {
+      background: rgba(255, 250, 242, 0.92);
+      border: 1px solid rgba(215, 203, 187, 0.9);
+      box-shadow: var(--shadow);
     }
 
+    .hero-card { border-radius: var(--radius-xl); overflow: hidden; position: relative; }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 122, 0, 0.16) 0%, rgba(255, 122, 0, 0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.95fr; gap: 28px; padding: 32px; align-items: stretch; }
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
       font-family: "DM Mono", monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--ink-soft);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 4px;
+      color: var(--teal);
     }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--orange); border-radius: 999px; }
 
-    .display {
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      line-height: 1.1;
-      text-transform: uppercase;
-    }
+    .display { margin: 0; font-family: "Permanent Marker", cursive; font-size: clamp(2.4rem, 5vw, 4.1rem); line-height: 1; color: var(--orange); }
+    .hero-headline { margin: 12px 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.03; letter-spacing: -0.05em; }
+    .hero-copy { max-width: 60ch; font-size: 1.08rem; line-height: 1.65; color: var(--ink-soft); }
 
-    .hero-headline {
-      margin: 24px 0 16px;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      color: var(--ink-soft);
-      font-weight: 500;
-      font-family: "Inter", sans-serif;
-    }
-
-    .hero-copy {
-      font-size: 1.1rem;
-      color: var(--ink);
-      max-width: 54ch;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 32px;
-    }
+    .hero-actions, .card-actions, .row-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-actions { margin-top: 24px; }
 
     .button-primary, .button-secondary, .button-ghost {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 48px;
-      padding: 0 24px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: var(--border-thick);
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
+    .button-primary { background: linear-gradient(135deg, var(--orange), #ff961d); color: #fff; box-shadow: 0 18px 30px -22px rgba(255, 122, 0, 0.9); }
+    .button-secondary { background: var(--teal); color: #fff; box-shadow: 0 18px 30px -22px rgba(21, 94, 99, 0.85); }
+    .button-ghost { border: 1px solid rgba(21, 94, 99, 0.18); color: var(--ink); background: rgba(255, 255, 255, 0.58); }
 
-    .button-primary {
-      background: var(--ink);
-      color: var(--paper);
+    .button-primary:hover, .button-secondary:hover, .button-ghost:hover, .track-card:hover, .quick-card:hover, .day-card:hover, .choice-button:hover { transform: translateY(-2px); }
+
+    .hero-media { display: grid; gap: 14px; }
+    .hero-image-wrap {
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(21, 94, 99, 0.16);
+      background: var(--paper-3);
+      min-height: 320px;
+      position: relative;
     }
-    .button-primary:hover {
-      background: var(--accent);
-      border-color: var(--accent);
+    .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    .art-panel {
+      position: relative;
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(255, 250, 242, 0.9), rgba(220, 236, 240, 0.84)),
+        linear-gradient(135deg, rgba(21, 94, 99, 0.08), rgba(255, 122, 0, 0.08));
     }
+    .art-panel::before, .art-panel::after { content: ""; position: absolute; inset: auto; border-radius: 999px; }
+    .art-panel::before { width: 220px; height: 220px; right: -30px; top: -28px; background: radial-gradient(circle, rgba(255, 122, 0, 0.36), rgba(255, 122, 0, 0.02) 72%); }
+    .art-panel::after { width: 280px; height: 280px; left: -70px; bottom: -110px; background: radial-gradient(circle, rgba(21, 94, 99, 0.28), rgba(21, 94, 99, 0.02) 72%); }
 
-    .button-secondary {
-      background: var(--paper);
-      color: var(--ink);
+    .art-panel-inner {
+      position: absolute;
+      inset: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(21, 94, 99, 0.1);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.18)),
+        repeating-linear-gradient(135deg, rgba(21, 94, 99, 0.03) 0, rgba(21, 94, 99, 0.03) 14px, transparent 14px, transparent 28px);
+      overflow: hidden;
     }
-    .button-secondary:hover {
-      background: var(--line);
+    .art-panel-band { position: absolute; left: -10%; right: -10%; height: 76px; border-radius: 999px; opacity: 0.92; }
+    .art-panel-band.is-top { top: 18%; background: linear-gradient(90deg, rgba(21, 94, 99, 0.84), rgba(21, 94, 99, 0.18)); transform: rotate(-9deg); }
+    .art-panel-band.is-middle { top: 42%; background: linear-gradient(90deg, rgba(255, 122, 0, 0.86), rgba(241, 201, 94, 0.16)); transform: rotate(8deg); }
+    .art-panel-band.is-bottom { top: 67%; background: linear-gradient(90deg, rgba(20, 55, 72, 0.76), rgba(20, 55, 72, 0.1)); transform: rotate(-6deg); }
+
+    .art-panel-copy { position: absolute; left: 24px; bottom: 22px; display: grid; gap: 6px; max-width: 240px; }
+    .art-panel-copy strong { font-family: "DM Mono", monospace; font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); }
+    .art-panel-copy span { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.04em; color: var(--ink); }
+
+    .art-panel.is-spotlight {
+      min-height: 280px;
+      background:
+        linear-gradient(155deg, rgba(255, 250, 242, 0.2), rgba(20, 55, 72, 0.18)),
+        linear-gradient(135deg, rgba(8, 52, 58, 0.96), rgba(21, 94, 99, 0.78));
     }
-
-    .button-ghost {
-      border: 1px solid transparent;
-      color: var(--ink);
-      text-decoration: underline;
+    .art-panel.is-spotlight .art-panel-inner {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 10px, transparent 10px, transparent 22px);
+      border-color: rgba(255, 255, 255, 0.08);
     }
-    .button-ghost:hover {
-      color: var(--accent);
-    }
+    .art-panel.is-spotlight .art-panel-band.is-top { background: linear-gradient(90deg, rgba(255, 122, 0, 0.95), rgba(255, 122, 0, 0.12)); }
+    .art-panel.is-spotlight .art-panel-band.is-middle { background: linear-gradient(90deg, rgba(241, 201, 94, 0.85), rgba(241, 201, 94, 0.12)); }
+    .art-panel.is-spotlight .art-panel-band.is-bottom { background: linear-gradient(90deg, rgba(220, 236, 240, 0.8), rgba(220, 236, 240, 0.08)); }
+    .art-panel.is-spotlight .art-panel-copy strong, .art-panel.is-spotlight .art-panel-copy span { color: #fff; }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
+    .hero-note { padding: 16px 18px; border-radius: 22px; background: linear-gradient(180deg, rgba(21, 94, 99, 0.08), rgba(255, 122, 0, 0.08)); border: 1px solid rgba(21, 94, 99, 0.14); }
+    .hero-note p { margin: 8px 0 0; color: var(--ink-soft); line-height: 1.6; }
 
-    .chip {
-      padding: 6px 12px;
-      border: var(--border-thin);
-      font-family: "DM Mono", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      background: var(--bg);
-    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(21, 94, 99, 0.08); color: var(--teal); font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .chip.is-warm { background: rgba(255, 122, 0, 0.12); color: var(--orange-deep); }
 
-    .hero-media { display: grid; gap: 20px; }
+    .grid-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 
-    .hero-note {
-      padding: 24px;
-      border: var(--border-thin);
-      background: var(--accent-soft);
-    }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .section-title { margin: 0; font-size: clamp(1.6rem, 2.8vw, 2.3rem); letter-spacing: -0.04em; }
+    .section-copy { margin: 0; color: var(--ink-soft); line-height: 1.6; max-width: 60ch; }
 
-    .mini-kicker {
-      font-family: "DM Mono", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+    .panel, .track-card, .quick-card, .day-card, .scenario-card, .reflection-card { border-radius: var(--radius-lg); padding: 22px; }
+    .track-card, .quick-card, .day-card, .choice-button { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
 
-    .grid-two { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .grid-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-
-    .section-head {
-      margin-bottom: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: var(--border-thick);
-      padding-bottom: 16px;
-    }
-
-    .section-title { font-size: 2.5rem; text-transform: uppercase; }
-    .section-copy { font-size: 1.1rem; color: var(--ink-soft); max-width: 50ch; margin: 0; }
-
-    .panel, .track-card, .quick-card, .day-card, .stat-card {
-      background: var(--paper);
-      border: var(--border-thin);
-      padding: 32px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .track-card:hover, .quick-card:hover, .day-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 4px 4px 0px var(--ink);
-    }
-
-    .card-kicker, .track-card-meta {
-      font-family: "DM Mono", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .track-card h3, .quick-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
-    .track-card p, .quick-card p { color: var(--ink-soft); margin-bottom: 24px; }
+    .track-card { display: grid; gap: 14px; text-align: left; }
+    .track-card-meta, .card-kicker, .mini-kicker { font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+    .track-card h3, .quick-card h3, .panel h3, .reflection-card h3 { margin: 0; font-size: 1.45rem; letter-spacing: -0.04em; }
+    .track-card p, .quick-card p, .panel p, .reflection-card p { margin: 0; color: var(--ink-soft); line-height: 1.6; }
     
-    .card-link {
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-    }
+    .track-card.is-side-a { border-color: rgba(21, 94, 99, 0.25); background: linear-gradient(180deg, rgba(220, 236, 240, 0.52), rgba(255, 250, 242, 0.94)); }
+    .track-card.is-side-b { border-color: rgba(255, 122, 0, 0.26); background: linear-gradient(180deg, rgba(255, 240, 223, 0.74), rgba(255, 250, 242, 0.94)); }
+    .card-link { display: inline-flex; align-items: center; gap: 8px; color: var(--teal); font-weight: 600; }
 
-    .stat-value { font-size: 3.5rem; font-family: "Space Grotesk", sans-serif; font-weight: 700; line-height: 1; }
-    .stat-label { margin-top: 12px; font-size: 1rem; color: var(--ink-soft); text-transform: uppercase; font-family: "DM Mono", monospace; }
+    .quick-card { display: grid; gap: 12px; text-align: left; background: rgba(255, 255, 255, 0.74); }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .stat-card { padding: 18px 20px; border-radius: 22px; background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(21, 94, 99, 0.12); }
+    .stat-value { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.05em; }
+    .stat-label { margin-top: 8px; color: var(--ink-soft); font-size: 0.98rem; }
 
     .spotlight {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      padding: 48px;
-      background: var(--ink);
-      color: var(--paper);
+      grid-template-columns: 1fr 1.05fr;
+      gap: 22px;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(21, 94, 99, 0.96), rgba(14, 77, 88, 0.92));
+      color: #fff;
+      box-shadow: var(--shadow);
     }
-    .spotlight .display { color: var(--accent); }
-    .spotlight .section-title, .spotlight p { color: var(--paper); }
-    .spotlight p { font-size: 1.1rem; opacity: 0.9; margin-top: 16px; }
+    .spotlight-media { border-radius: 24px; overflow: hidden; min-height: 280px; }
+    .spotlight-media img { width: 100%; height: 100%; object-fit: cover; }
+    .spotlight .display { color: #f7ba52; }
+    .spotlight .section-title, .spotlight p { color: #fff; }
+    .spotlight p { opacity: 0.9; }
 
-    .back-link {
-      font-family: "DM Mono", monospace;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    .back-link:hover { color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--teal); font-weight: 600; }
+    .track-layout { display: grid; gap: 20px; }
+    .track-hero { display: grid; grid-template-columns: 1fr 320px; gap: 22px; align-items: stretch; }
 
-    .track-hero { padding: 0; border: none; background: transparent; }
-    
-    .script-card {
-      padding: 32px;
-      border: var(--border-thin);
-      background: var(--ink);
-      color: var(--paper);
-      margin-top: 24px;
-    }
-    .script-label {
-      font-family: "DM Mono", monospace;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-      display: block;
-    }
-    .script-quote { font-size: 1.25rem; font-style: italic; line-height: 1.5; }
+    .track-stage { border-radius: var(--radius-lg); overflow: hidden; min-height: 280px; background: rgba(220, 236, 240, 0.46); border: 1px solid rgba(21, 94, 99, 0.18); }
+    .track-stage img { width: 100%; height: 100%; object-fit: cover; }
 
-    .danger-card {
-      padding: 32px;
-      border: var(--border-thin);
-      background: #FFF5F5;
-    }
-    
-    ul { padding-left: 20px; color: var(--ink-soft); margin-top: 16px; }
-    li { margin-bottom: 8px; }
-
-    .ladder { display: grid; gap: 16px; margin-top: 24px; }
-    .ladder-rung {
+    .track-bullet-list, .checklist, .prompt-list, .note-list { display: grid; gap: 10px; }
+    .bullet-row, .check-row, .prompt-item, .note-item {
       display: grid;
-      grid-template-columns: 48px 1fr 1fr;
-      gap: 24px;
-      padding: 24px;
-      border: var(--border-thin);
-      background: var(--paper);
-      align-items: start;
-    }
-    .ladder-number { font-size: 1.5rem; font-family: "Space Grotesk", sans-serif; font-weight: 700; }
-    .ladder-label { font-family: "DM Mono", monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
-
-    .formula-hero {
-      padding: 48px;
-      background: var(--ink);
-      color: var(--paper);
-      text-align: center;
-    }
-    .formula-line {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-    .formula-token {
-      padding: 16px 24px;
-      border: 1px solid var(--paper);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.25rem;
-      text-transform: uppercase;
-    }
-
-    .scenario-card { padding: 48px; border: var(--border-thick); background: var(--paper); }
-    .scenario-setup { font-size: 1.2rem; margin-bottom: 24px; }
-    .scenario-student {
-      padding: 24px;
-      border-left: 4px solid var(--accent);
-      background: var(--bg);
-      margin-bottom: 32px;
-    }
-    .choice-button {
-      padding: 24px;
-      border: var(--border-thin);
-      background: var(--paper);
-      text-align: left;
-      margin-bottom: 16px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 16px;
-    }
-    .choice-key {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: var(--border-thin);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-    }
-    .choice-button.is-correct { background: #F0FDF4; border-color: #166534; }
-    .choice-button.is-wrong { background: #FEF2F2; border-color: #991B1B; }
-
-    .reflection-textarea {
-      width: 100%;
-      min-height: 160px;
-      padding: 24px;
-      border: var(--border-thin);
-      background: var(--paper);
-      font-family: "Inter", sans-serif;
-      margin-top: 24px;
-      resize: vertical;
-    }
-    .reflection-textarea:focus { outline: none; border-color: var(--accent); }
-
-    .panic-fab {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 18;
-      padding: 16px 24px;
-      background: var(--accent);
-      color: var(--paper);
-      border: var(--border-thick);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      display: flex;
+      grid-template-columns: auto 1fr;
       gap: 12px;
-      box-shadow: 4px 4px 0px var(--ink);
+      align-items: start;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(21, 94, 99, 0.1);
     }
-    .panic-fab:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--ink); }
-
-    .timeline { padding-left: 32px; border-left: 2px solid var(--ink); margin-left: 16px; }
-    .timeline-card {
-      position: relative;
-      padding: 0 0 32px 32px;
-    }
-    .timeline-card::before {
-      content: "";
-      position: absolute;
-      left: -41px;
-      top: 0;
-      width: 16px;
-      height: 16px;
-      background: var(--paper);
-      border: 4px solid var(--ink);
-    }
-
-    .check-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      border: var(--border-thin);
-      margin-bottom: 8px;
-      width: 100%;
-      text-align: left;
-    }
-    .check-box {
-      width: 24px;
-      height: 24px;
-      border: 2px solid var(--ink);
-      display: flex;
+    .bullet-index, .prompt-index, .note-index {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: rgba(255, 122, 0, 0.12);
+      color: var(--orange-deep);
+      font-family: "DM Mono", monospace;
+      font-size: 0.76rem;
     }
-    .check-row.is-done .check-box { background: var(--ink); color: var(--paper); }
-    .check-row.is-done .check-copy { text-decoration: line-through; color: var(--ink-soft); }
 
-    .pill-tabs { display: flex; gap: 12px; margin-bottom: 32px; border-bottom: var(--border-thin); padding-bottom: 16px; }
-    .pill-tab { font-family: "Space Grotesk", sans-serif; font-size: 1.1rem; text-transform: uppercase; color: var(--ink-soft); }
-    .pill-tab.is-active { color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--accent); }
+    .script-card { padding: 20px; border-radius: 24px; background: linear-gradient(180deg, rgba(255, 240, 223, 0.92), rgba(255, 250, 242, 0.92)); border: 1px solid rgba(255, 122, 0, 0.18); }
+    .script-label { display: inline-flex; margin-bottom: 10px; font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-deep); }
+    .script-quote { font-size: 1.12rem; line-height: 1.7; color: var(--ink); }
 
-    @media (max-width: 1024px) {
-      .hero-card, .spotlight { grid-template-columns: 1fr; padding: 32px; }
-      .grid-four, .grid-three { grid-template-columns: repeat(2, 1fr); }
-      .section-head { flex-direction: column; align-items: flex-start; }
+    .danger-card { padding: 20px; border-radius: 24px; background: rgba(255, 255, 255, 0.82); border: 1px solid rgba(201, 93, 84, 0.18); }
+    .danger-card ul, .panel ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); line-height: 1.75; }
+
+    .pill-tabs { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill-tab { padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(21, 94, 99, 0.14); background: rgba(255, 255, 255, 0.74); color: var(--ink-soft); }
+    .pill-tab.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+    .ladder { display: grid; gap: 12px; }
+    .ladder-rung { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 18px; align-items: start; padding: 18px 20px; border-radius: 24px; }
+    .ladder-rung.is-escalated { border: 1px solid rgba(255, 122, 0, 0.24); background: linear-gradient(180deg, rgba(255, 240, 223, 0.84), rgba(255, 250, 242, 0.92)); }
+    .ladder-number { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.05em; color: var(--teal); }
+    .ladder-rung.is-escalated .ladder-number { color: var(--orange-deep); }
+    .ladder-label { font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+    .ladder-text { line-height: 1.65; color: var(--ink); }
+
+    .formula-hero { padding: 28px; border-radius: var(--radius-xl); background: linear-gradient(135deg, rgba(21, 94, 99, 0.96), rgba(17, 83, 92, 0.9)); color: #fff; box-shadow: var(--shadow); }
+    .formula-line { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+    .formula-token { padding: 12px 18px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.18); font-family: "DM Mono", monospace; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .timeline { position: relative; display: grid; gap: 16px; padding-left: 24px; }
+    .timeline::before { content: ""; position: absolute; top: 8px; bottom: 8px; left: 8px; width: 2px; background: linear-gradient(180deg, rgba(21, 94, 99, 0.16), rgba(255, 122, 0, 0.24)); }
+    .timeline-card { position: relative; padding: 20px 20px 20px 24px; border-radius: var(--radius-lg); background: rgba(255, 250, 242, 0.92); border: 1px solid rgba(21, 94, 99, 0.12); box-shadow: var(--shadow); }
+    .timeline-card::before { content: ""; position: absolute; left: -22px; top: 26px; width: 16px; height: 16px; border-radius: 999px; background: linear-gradient(135deg, var(--orange), var(--gold)); box-shadow: 0 0 0 6px rgba(255, 122, 0, 0.1); }
+    .timeline-time { font-family: "DM Mono", monospace; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-deep); }
+    .timeline-title { margin: 8px 0 8px; font-size: 1.36rem; letter-spacing: -0.04em; }
+    .timeline-body { color: var(--ink-soft); line-height: 1.7; }
+
+    .scenario-card { display: grid; gap: 20px; }
+    .scenario-setup { color: var(--ink-soft); line-height: 1.7; }
+    .scenario-student { padding: 20px; border-radius: 22px; background: rgba(21, 94, 99, 0.06); border-left: 5px solid var(--teal); }
+    .scenario-student strong { display: inline-block; margin-bottom: 6px; }
+    .choice-list { display: grid; gap: 12px; }
+    .choice-button { padding: 18px; border-radius: 20px; text-align: left; background: rgba(255, 255, 255, 0.82); border: 1px solid rgba(21, 94, 99, 0.12); }
+    .choice-button.is-correct { border-color: rgba(47, 158, 105, 0.32); background: rgba(47, 158, 105, 0.08); }
+    .choice-button.is-wrong { border-color: rgba(201, 93, 84, 0.3); background: rgba(201, 93, 84, 0.08); }
+    .choice-top { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+    .choice-key { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: rgba(21, 94, 99, 0.08); color: var(--teal); font-family: "DM Mono", monospace; }
+    .choice-feedback { margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(21, 94, 99, 0.18); color: var(--ink-soft); line-height: 1.65; }
+
+    .days-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .day-card { text-align: left; background: rgba(255, 255, 255, 0.78); border: 1px solid rgba(21, 94, 99, 0.12); }
+    .day-card.is-active { background: linear-gradient(135deg, rgba(21, 94, 99, 0.95), rgba(14, 77, 88, 0.9)); border-color: var(--teal); color: #fff; }
+    .day-card.is-active .card-kicker, .day-card.is-active p { color: rgba(255, 255, 255, 0.88); }
+    .day-card.is-done { box-shadow: 0 0 0 2px rgba(47, 158, 105, 0.15); }
+
+    .check-row { grid-template-columns: auto 1fr; text-align: left; }
+    .check-box { width: 22px; height: 22px; border-radius: 7px; border: 1px solid rgba(21, 94, 99, 0.18); display: inline-flex; align-items: center; justify-content: center; color: #fff; background: rgba(21, 94, 99, 0.06); margin-top: 2px; }
+    .check-row.is-done .check-box { background: var(--teal); border-color: var(--teal); }
+    .check-row.is-done .check-copy { color: var(--ink-soft); text-decoration: line-through; }
+    .check-copy { line-height: 1.6; }
+
+    .reflection-textarea { width: 100%; min-height: 140px; resize: vertical; padding: 16px 18px; border-radius: 18px; border: 1px solid rgba(21, 94, 99, 0.16); background: rgba(255, 255, 255, 0.82); color: var(--ink); }
+    .reflection-textarea:focus { outline: 2px solid rgba(255, 122, 0, 0.2); border-color: rgba(255, 122, 0, 0.34); }
+    .reflection-log { display: grid; gap: 12px; }
+    .reflection-entry { padding: 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.74); border: 1px solid rgba(21, 94, 99, 0.1); }
+    .reflection-date { margin-bottom: 8px; font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange-deep); }
+    .reflection-copy { color: var(--ink-soft); line-height: 1.7; white-space: pre-wrap; }
+
+    .lens-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .lens-card { padding: 22px; border-radius: var(--radius-lg); }
+    .lens-card h3 { margin: 0 0 10px; font-size: 1.45rem; letter-spacing: -0.04em; }
+    .lens-copy { display: grid; gap: 8px; color: var(--ink-soft); line-height: 1.68; }
+    .lens-label { margin-top: 4px; font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); }
+
+    .panic-fab { position: fixed; right: 18px; bottom: 18px; z-index: 18; display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 999px; background: linear-gradient(135deg, var(--orange), #ff9219); color: #fff; box-shadow: 0 22px 38px -22px rgba(255, 122, 0, 0.92); }
+    .panic-overlay { position: fixed; inset: 0; z-index: 25; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(13, 68, 78, 0.38); backdrop-filter: blur(10px); }
+    .panic-overlay[hidden] { display: none; }
+    .panic-sheet { width: min(640px, 100%); padding: 28px; border-radius: 30px; background: rgba(255, 250, 242, 0.98); border: 1px solid rgba(255, 122, 0, 0.18); box-shadow: var(--shadow); }
+    .panic-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .close-button { width: 38px; height: 38px; border-radius: 999px; background: rgba(21, 94, 99, 0.08); }
+    
+    .breath-orb { width: 74px; height: 74px; margin: 18px auto 12px; border-radius: 999px; background: radial-gradient(circle, rgba(255, 122, 0, 0.95) 0%, rgba(255, 122, 0, 0.62) 55%, rgba(255, 122, 0, 0.14) 100%); animation: breathe 8s ease-in-out infinite; }
+    @keyframes breathe { 0%, 100% { transform: scale(0.78); opacity: 0.82; } 50% { transform: scale(1.08); opacity: 1; } }
+    .panic-breath { text-align: center; font-family: "DM Mono", monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+    
+    .panic-script-list { display: grid; gap: 10px; margin-top: 20px; }
+    .panic-script { padding: 16px; border-radius: 18px; background: rgba(255, 255, 255, 0.74); border-left: 4px solid var(--orange); border-top: 1px solid rgba(255, 122, 0, 0.12); border-right: 1px solid rgba(255, 122, 0, 0.12); border-bottom: 1px solid rgba(255, 122, 0, 0.12); }
+    .panic-script p { margin: 6px 0 0; color: var(--ink); line-height: 1.65; }
+
+    .empty-state { padding: 28px; border-radius: 24px; text-align: center; color: var(--ink-soft); background: rgba(255, 255, 255, 0.74); border: 1px dashed rgba(21, 94, 99, 0.18); }
+
+    @media (max-width: 1080px) {
+      .topbar-inner { grid-template-columns: 1fr; }
+      .nav-row { justify-content: start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+      .status-pod { justify-self: start; }
+      .hero-grid, .track-hero, .spotlight { grid-template-columns: 1fr; }
+      .grid-three, .grid-four, .days-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-two, .lens-grid, .stat-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 768px) {
-      .grid-two, .grid-three, .grid-four { grid-template-columns: 1fr; }
+    @media (max-width: 760px) {
+      .main-shell { padding-top: 20px; }
+      .hero-grid, .panel, .track-card, .quick-card, .day-card, .scenario-card, .reflection-card, .formula-hero, .panic-sheet, .spotlight { padding: 20px; }
+      .hero-image-wrap, .spotlight-media { min-height: 220px; }
+      .grid-three, .grid-four, .days-grid { grid-template-columns: 1fr; }
       .ladder-rung { grid-template-columns: 1fr; }
+      .timeline { padding-left: 18px; }
+      .timeline-card::before { left: -16px; }
     }
   </style>
 </head>
 <body>
   <div id="app"></div>
-
   <script>
     const data = {
       expectations: [
         {
-          id: "seats",
-          num: "01",
-          title: "Enter and go directly to your assigned seat",
-          side: "Phase 1",
+          id: "seats", num: "01", title: "Enter and go directly to your assigned seat", side: "Phase 1",
           hook: "Stops the doorway chaos and creates a predictable threshold.",
           studentSteps: [
-            "Walk into the room.",
-            "Look at the board or posted seat chart.",
-            "Go directly to your assigned seat.",
-            "Sit down.",
-            "Start the Do Now silently."
+            "Walk into the room.", "Look at the board or posted seat chart.",
+            "Go directly to your assigned seat.", "Sit down.", "Start the Do Now silently."
           ],
           teacherScript: "When you enter this room, there are five steps. Walk in. Find your assigned seat. Sit down. Start the Do Now. Stay silent unless I say otherwise. We are going to practice that until it is automatic.",
           frame: "Assigned seats are a classroom regulation tool. They lower social ignition and help you monitor quickly. Focus on the present-moment expectation.",
-          dontSay: [
-            "Please sit down, everybody.",
-            "How many times do I have to tell y'all?",
-            "Come on, guys, settle down."
-          ],
+          dontSay: ["Please sit down, everybody.", "How many times do I have to tell y'all?", "Come on, guys, settle down."],
           why: "Long explanations are easily ignored. A specific direction to a specific student, said once, lands perfectly."
         },
         {
-          id: "seated",
-          num: "02",
-          title: "Remain in your seat unless given permission",
-          side: "Phase 1",
+          id: "seated", num: "02", title: "Remain in your seat unless given permission", side: "Phase 1",
           hook: "Keeps the body of the class intact. You move, they do not.",
           studentSteps: [
-            "Stay in your assigned seat during work time.",
-            "Raise your hand or use the class signal if you need help.",
-            "Keep working while waiting.",
-            "Move only when the teacher gives permission."
+            "Stay in your assigned seat during work time.", "Raise your hand or use the class signal if you need help.",
+            "Keep working while waiting.", "Move only when the teacher gives permission."
           ],
           teacherScript: "During class, your seat is your workspace. If you need something, do not get up. Raise your hand or use the signal. I will come to you.",
           frame: "If you answer the student who walked up first, you just taught the wrong system. Reward the signal, not the stand.",
-          dontSay: [
-            "What are you doing out of your seat?",
-            "Sit down, sit down, sit down."
-          ],
+          dontSay: ["What are you doing out of your seat?", "Sit down, sit down, sit down."],
           why: "Do not accidentally train students that standing up gets faster attention."
         },
         {
-          id: "language",
-          num: "03",
-          title: "Use school-appropriate language.",
-          side: "Phase 2",
+          id: "language", num: "03", title: "Use school-appropriate language.", side: "Phase 2",
           hook: "Frustration is allowed. Profanity is not. Name it, restate, move on.",
           studentSteps: [
-            "Pause before speaking.",
-            "Use school-appropriate words.",
-            "If profanity comes out, restate the message appropriately."
+            "Pause before speaking.", "Use school-appropriate words.", "If profanity comes out, restate the message appropriately."
           ],
           teacherScript: "In this room, frustration is allowed. Profanity is not. If the wrong word comes out, you will pause and say it again the school way.",
           frame: "Make the response more regulated than the language that triggered it. Respond to the bodily signal, no character lectures.",
-          dontSay: [
-            "How dare you speak to me that way!",
-            "Do you kiss your mother with that mouth?"
-          ],
-          replacementPhrases: [
-            "I am frustrated.",
-            "Can you help me?",
-            "I need a minute."
-          ],
+          dontSay: ["How dare you speak to me that way!", "Do you kiss your mother with that mouth?"],
+          replacementPhrases: ["I am frustrated.", "Can you help me?", "I need a minute.", "I do not like that.", "Can I try again?"],
           why: "Profanity is fast and emotional. Your job is to be the calmest thing in the room."
         }
       ],
@@ -608,7 +486,9 @@
           title: "Assigned seat refusal",
           rungs: [
             { if: "Student questions the seat once.", then: "\"That is your seat. Go there now.\"", escalate: false },
+            { if: "Student continues talking but starts moving.", then: "Let the movement count. Do not re-engage.", escalate: false },
             { if: "Student refuses and remains standing.", then: "\"You may go to your seat now, or I will follow the next school step.\"", escalate: true },
+            { if: "Student still refuses.", then: "Implement the next campus consequence without argument.", escalate: true },
             { if: "Student eventually complies.", then: "Do not add a lecture. Return to instruction.", escalate: false }
           ]
         },
@@ -616,7 +496,9 @@
           title: "Out of seat",
           rungs: [
             { if: "Student stands for non-emergency.", then: "\"Back to your seat.\" or \"Seat. Now.\"", escalate: false },
+            { if: "Student returns quickly.", then: "Do not continue talking. Do not praise. Move on.", escalate: false },
             { if: "Student walks to you to show work.", then: "\"Return to your seat. I will come to you.\"", escalate: false },
+            { if: "Student keeps moving.", then: "\"You may go back to your seat now, or I will choose a different seat for you.\"", escalate: true },
             { if: "Several students start moving.", then: "\"Freeze. Back to seats in 3, 2, 1.\" Reset procedure.", escalate: true }
           ]
         },
@@ -625,419 +507,679 @@
           rungs: [
             { if: "Student blurts profanity from frustration.", then: "\"Language. Try again.\"", escalate: false },
             { if: "Student restates appropriately.", then: "Move on. No lecture.", escalate: false },
-            { if: "Profanity directed at another.", then: "\"Stop. That language is not okay. Move to the reset seat.\"", escalate: true }
+            { if: "Profanity directed at another.", then: "\"Stop. That language is not okay. Move to the reset seat.\"", escalate: true },
+            { if: "Profanity spreads.", then: "\"Pause. Frustration can stay. Profanity cannot. Reset language and we continue.\"", escalate: true }
           ]
         }
       },
       arrival: [
-        { time: "-5 min", title: "Before students arrive", body: "Post the Do Now where it's visible. Post seating chart." },
-        { time: "00:00", title: "Greet at the threshold", body: "\"Good morning. Find your assigned seat. Do Now on the board.\"" },
-        { time: "01:00", title: "Circulate", body: "Nod at students working. Direct stragglers: \"Assigned seat. Now.\"" },
-        { time: "03:00", title: "Launch the Do Now", body: "\"Eyes here in 3, 2, 1. You should be seated with your Do Now started.\"" }
+        { time: "-5 min", title: "Before students arrive", body: "Post the Do Now where it's visible. Post seating chart. Put all needed materials out." },
+        { time: "-1 min", title: "Stand at the threshold", body: "You are at the door before students enter." },
+        { time: "00:00", title: "Greet every student", body: "\"Good morning. Find your assigned seat. Do Now on the board.\"" },
+        { time: "01:00", title: "Circulate", body: "Nod at students working. Direct stragglers calmly: \"Assigned seat. Now.\"" },
+        { time: "03:00", title: "Launch the Do Now", body: "\"Eyes here in 3, 2, 1. You should be seated with your Do Now started.\"" },
+        { time: "05:00", title: "Handle stragglers", body: "Walk near, quiet redirection. Do not get trapped on one student." },
+        { time: "10:00", title: "Monitor the routine", body: "If it held: keep going. If it did not: note who, where, what. Reset tomorrow." }
       ],
       days: [
         {
           num: 1, label: "Day 01", focus: "Reveal the expectation clearly.",
-          actions: ["Teach expectations directly.", "Practice entry twice.", "Correct out-of-seat immediately."],
+          actions: ["Teach all three expectations directly.", "Practice entry at least two times.", "Correct every out-of-seat behavior immediately.", "Teach profanity restatement language.", "End class with a brief review."],
           script: "Today we are resetting how this room works so learning can happen faster.",
-          reflectPrompts: ["Who still resisted assigned seats?", "Which script felt easiest?"]
+          reflectPrompts: ["Who still resisted assigned seats?", "Who kept leaving their seat?", "Who needed profanity correction?", "Which correction script felt easiest to use?"]
         },
         {
           num: 2, label: "Day 02", focus: "Resist the urge to over-explain.",
-          actions: ["Run the door script with no changes.", "Follow through strongly on staying seated."],
+          actions: ["Run the same door script with no changes.", "Give one short reminder before the Do Now.", "Follow through more strongly on staying seated.", "Praise the routine, not personalities."],
           script: "Today the goal is faster entry and fewer reminders. Show me you know the routine.",
-          reflectPrompts: ["Where did the routine break?", "Did you stay under 10 words per correction?"]
+          reflectPrompts: ["Was entry faster than yesterday?", "Where did the routine break?", "Did you stay under 10 words per correction?"]
         },
         {
           num: 3, label: "Day 03", focus: "Reflect on the routine's strength.",
-          actions: ["Reduce reminders.", "Monitor independent starts."],
-          script: "By now, you know the system. Show it.",
-          reflectPrompts: ["How many began without prompting?", "What still requires too much talking?"]
+          actions: ["Reduce reminders.", "Monitor whether students begin independently.", "Catch repeated out-of-seat behavior early.", "Move profanity correction more privately when possible."],
+          script: "By now, you know the system. I should not have to repeat it. Show it.",
+          reflectPrompts: ["How many students began without any prompt?", "Which corrections went private today?", "What still requires too much talking?"]
         },
         {
           num: 4, label: "Day 04", focus: "Watch it hold.",
-          actions: ["Run entry with almost no reminders.", "Notice students needing individual support."],
-          script: "Today I am watching what this class can do without extra reminders.",
-          reflectPrompts: ["Is the system holding? If not, tighten consistency, not words."]
+          actions: ["Run entry with almost no reminders.", "Track how many students begin correctly on their own.", "Notice which students still need individualized support."],
+          script: "Today I am watching to see what this class can do without extra reminders.",
+          reflectPrompts: ["How many started the Do Now on their own?", "Which 2 to 3 students still need a private plan?", "Is the system holding? If not, tighten consistency, not words."]
         }
       ],
       scenarios: [
         {
-          id: "s1", ladder: "seats", setup: "A student walks in and loudly announces:", studentSays: "\"Nah, this ain't my seat. I'm sittin' with Jayden.\"",
+          id: "s1", ladder: "seats", setup: "A student walks in, sees their new seat, and loudly announces to the room:", studentSays: "\"Nah, this ain't my seat. I'm sittin' with Jayden.\"",
           choices: [
-            { text: "\"I explained yesterday why I moved everyone. Just trust me.\"", correct: false, feedback: "Explaining invites debate." },
-            { text: "\"That is your seat. Go there now.\"", correct: true, feedback: "Name + direction + timeframe. Core pattern." }
+            { text: "\"I explained yesterday why I moved everyone. This is a better seat for you - just trust me on this.\"", correct: false, feedback: "Explaining invites debate and turns it into a performance for the room." },
+            { text: "\"That is your seat. Go there now.\"", correct: true, feedback: "Name + direction + timeframe. Said once, calmly, then monitor. This is the core pattern." },
+            { text: "\"If you don't sit down right now, you're going to the office.\"", correct: false, feedback: "Threats escalate the room and put you in a corner. Save consequences for the next rung." },
+            { text: "Wait for the student to finish, then respond when they are calmer.", correct: false, feedback: "Silence reads as permission. Direct briefly, then move." }
+          ]
+        },
+        {
+          id: "s2", ladder: "seated", setup: "Mid-lesson, a student stands up and walks toward your desk with their paper.", studentSays: "\"Ms., can you check this real quick?\"",
+          choices: [
+            { text: "Quickly check the paper because you do not want to embarrass them.", correct: false, feedback: "You just taught that standing up gets attention first. The system inverts." },
+            { text: "\"Return to your seat. I will come to you.\"", correct: true, feedback: "Keeps the system intact. Follow through by actually going to them within 30 seconds." },
+            { text: "\"Why are you out of your seat?\"", correct: false, feedback: "Questions invite explanation and debate. Give the direction, not the interview." },
+            { text: "Ignore it and hope they return to their seat.", correct: false, feedback: "Ignoring reads as permission and erodes the expectation." }
           ]
         },
         {
           id: "s3", ladder: "language", setup: "A student slams their pencil down and says:", studentSays: "\"This is stupid as hell.\"",
           choices: [
-            { text: "\"Excuse me? We do not speak that way.\"", correct: false, feedback: "Matches their intensity." },
-            { text: "\"Language. Try again with school words.\"", correct: true, feedback: "Light cue, clear redirect." }
+            { text: "\"Excuse me? We do not speak that way in my classroom.\"", correct: false, feedback: "Matches their intensity and adds a lecture." },
+            { text: "\"Language. Try again with school words.\"", correct: true, feedback: "Light cue, clear redirect, no shame. Gives them the path back." },
+            { text: "Write them up immediately.", correct: false, feedback: "Skipping the cue skips a learning moment. Use the lightest effective correction first." },
+            { text: "\"Do you talk to your mother like that?\"", correct: false, feedback: "Invites argument and turns a small moment into a confrontation." }
+          ]
+        },
+        {
+          id: "s4", ladder: "seated", setup: "Three students are out of their seats, chatting near the window. The rest of the class is watching to see what you will do.", studentSays: "[The room is escalating]",
+          choices: [
+            { text: "Call each one by name from across the room.", correct: false, feedback: "Escalates the volume and the performance." },
+            { text: "\"Freeze. Back to seats in 3, 2, 1.\"", correct: true, feedback: "Stops the whole room, resets the procedure for everyone." },
+            { text: "Wait it out because they will sit back down eventually.", correct: false, feedback: "Waiting reads as permission." },
+            { text: "Walk over and physically guide them back.", correct: false, feedback: "Hands-on escalates risk. Use your voice and proximity." }
+          ]
+        },
+        {
+          id: "s5", ladder: "seated", setup: "A student who normally shuts down when corrected drops her head on her desk after you redirect her.", studentSays: "[Head down, silent, not working]",
+          choices: [
+            { text: "\"Head up. I said get to work.\"", correct: false, feedback: "For a shutdown student, pressure collapses the system further." },
+            { text: "Quietly set her Do Now near her, say \"Start when you can,\" and move on.", correct: true, feedback: "Respects the shutdown response, keeps the expectation alive without power struggle." },
+            { text: "Send her to the hallway to collect herself.", correct: false, feedback: "Removal can read as rejection. Try proximity first." },
+            { text: "Loudly praise another student to shame her into working.", correct: false, feedback: "Shame-based motivation damages trust." }
           ]
         }
       ],
       trauma: [
-        { title: "Shutdown (freeze)", summary: "Student goes silent. Nervous system hit the brakes.", strategy: "Use proximity without pressure. Circle back.", watch: "Slouching, sudden quiet." },
-        { title: "Escalation (fight)", summary: "Volume rises, body tenses.", strategy: "Lower volume. Give a choice, not an ultimatum.", watch: "Jaw set, fast breathing." }
+        { title: "Shutdown (freeze)", summary: "Student goes silent, head down, and will not engage. Their nervous system hit the brakes.", strategy: "Use proximity without pressure. Place the work near them. Say, 'Start when you can.' Avoid public call-outs.", watch: "Slouching, eyes dropping, sudden quiet after a correction." },
+        { title: "Escalation (fight)", summary: "Volume rises, language sharpens. They are trying to make the threat go away by making it bigger.", strategy: "Lower your volume. Use fewer words. Give a choice, not an ultimatum.", watch: "Jaw set, faster breathing, pacing, locking eyes." },
+        { title: "Over-function (fawn)", summary: "Student takes on managing the room through tattling or fixing peers. It looks like helpfulness but is anxiety.", strategy: "Say, 'Your job is your work. I've got the room.' Redirect warmly.", watch: "Constant hand up about others instead of self." },
+        { title: "Flight", summary: "Student walks out or asks to leave constantly. Escape is the regulation strategy.", strategy: "Build a pre-planned exit with a signal, destination, and return time.", watch: "Repeat bathroom asks, sudden 'I need water,' edging toward the door." },
+        { title: "Hypervigilance", summary: "Student tracks your every move, reads tone for danger, misreads neutral corrections.", strategy: "Consistency is regulation. Same script every day. No surprise tone shifts.", watch: "Flinching at raised voices, asking 'Are you mad?'" },
+        { title: "Dissociation", summary: "Student is physically present but cognitively elsewhere. Eyes glazed.", strategy: "Tap the desk, not the student. Give a concrete single task: 'Open to page 12.'", watch: "Staring into middle distance, delayed reactions." }
       ],
       panicScripts: [
         { label: "Room is loud", script: "Freeze. Back to seats in 3, 2, 1." },
-        { label: "Profanity", script: "Language. Try again with school words." },
+        { label: "One student escalating", script: "Take a breath. Try that again." },
+        { label: "Profanity just happened", script: "Language. Try again with school words." },
+        { label: "Too many redirecting", script: "Pause. We are going to practice this again." },
+        { label: "You feel heated", script: "[To self] One direction. One timeframe. Then monitor." },
         { label: "Student won't sit", script: "That is your seat. Go there now." }
+      ],
+      economyExamples: [
+        { when: "Student out of seat", script: "Jordan, seat now." },
+        { when: "Student in wrong seat", script: "Maya, assigned seat. Now." },
+        { when: "Profanity just happened", script: "Language. Try that again." },
+        { when: "Class needs to focus", script: "Eyes here in 3, 2, 1." },
+        { when: "Student walked up to you", script: "Return to your seat. I will come to you." },
+        { when: "Whole-class reset", script: "Freeze. Back to seats in 3, 2, 1." }
       ]
     };
 
-    const state = { screen: "desk", trackId: "seats", ladderId: "seats", scenarioIndex: 0, selectedChoiceIndex: null, selectedDay: 1, panicOpen: false };
-    let progress = JSON.parse(localStorage.getItem("r3apProgress") || "{}");
-    let reflections = JSON.parse(localStorage.getItem("r3apReflections") || "[]");
+    const storageKeys = { progress: "r3apBrightStudioProgress", reflections: "r3apBrightStudioReflections" };
 
+    const state = { screen: "desk", trackId: "seats", ladderId: "seats", scenarioIndex: 0, selectedChoiceIndex: null, selectedDay: 1, panicOpen: false };
+    let progress = loadProgress();
+    let reflections = loadReflections();
     const appRoot = document.getElementById("app");
 
-    function save() { localStorage.setItem("r3apProgress", JSON.stringify(progress)); localStorage.setItem("r3apReflections", JSON.stringify(reflections)); }
-    function getRecord(day) { return progress[day] || { actions: [], reflection: "" }; }
+    function escapeHtml(value) {
+      return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;").replaceAll("'", "&#39;");
+    }
+
+    function loadProgress() { try { return JSON.parse(localStorage.getItem(storageKeys.progress) || "{}"); } catch { return {}; } }
+    function saveProgress() { localStorage.setItem(storageKeys.progress, JSON.stringify(progress)); }
+    function loadReflections() { try { return JSON.parse(localStorage.getItem(storageKeys.reflections) || "[]"); } catch { return []; } }
+    function saveReflections() { localStorage.setItem(storageKeys.reflections, JSON.stringify(reflections)); }
+
+    function getDayRecord(dayNum) {
+      const day = data.days.find((item) => item.num === dayNum);
+      if (!day) return { actions: [], reflection: "" };
+      const stored = progress[dayNum] || {};
+      const actions = Array.isArray(stored.actions) ? [...stored.actions] : [];
+      while (actions.length < day.actions.length) actions.push(false);
+      return { actions, reflection: stored.reflection || "" };
+    }
+    function setDayRecord(dayNum, nextRecord) { progress = { ...progress, [dayNum]: nextRecord }; saveProgress(); }
+    
+    function totalActionCount() { return data.days.reduce((total, day) => total + day.actions.length, 0); }
+    function completedActionCount() { return data.days.reduce((total, day) => { const record = getDayRecord(day.num); return total + record.actions.filter(Boolean).length; }, 0); }
+    function completedDayCount() { return data.days.filter((day) => { const record = getDayRecord(day.num); return record.actions.filter(Boolean).length >= day.actions.length; }).length; }
+    function activeDayNumber() { return Math.min(completedDayCount() + 1, data.days.length); }
+
+    function navScreen() {
+      if (state.screen === "track" || state.screen === "arrival" || state.screen === "trauma") return "desk";
+      return state.screen;
+    }
 
     function render() {
       appRoot.innerHTML = `
         <div class="shell">
           ${renderHeader()}
           <main class="main-shell">${renderScreen()}</main>
-          <button class="panic-fab" data-action="open-panic"><span>R³ Reset</span></button>
-          ${state.panicOpen ? renderPanic() : ""}
+          <button class="panic-fab" type="button" data-action="open-panic"><span>R³ Reset</span><span>One breath</span></button>
+          ${renderPanicOverlay()}
         </div>
       `;
     }
 
     function renderHeader() {
       const navItems = [
-        { s: "desk", l: "The Studio" }, { s: "equalizer", l: "Equalizer" }, { s: "ladders", l: "In The Booth" },
-        { s: "practice", l: "Sessions" }, { s: "rollout", l: "Rollout" }
+        { screen: "desk", label: "The Studio" }, { screen: "equalizer", label: "Equalizer" }, { screen: "ladders", label: "In The Booth" },
+        { screen: "practice", label: "Sessions" }, { screen: "rollout", label: "Rollout" }
       ];
+      const activeNav = navScreen();
       return `
         <header class="topbar">
           <div class="topbar-inner">
             <div class="brand-lockup">
-              <div class="brand-dot"></div>
+              <span class="brand-dot"></span>
               <div class="brand-text">
                 <div class="brand-title">R³.A.P. Agency</div>
                 <div class="brand-sub">Bright Studio</div>
               </div>
             </div>
-            <nav class="nav-row">
-              ${navItems.map(i => `<button class="nav-button ${state.screen === i.s ? 'is-active' : ''}" data-action="goto" data-target="${i.s}">${i.l}</button>`).join('')}
+            <nav class="nav-row" aria-label="Primary">
+              ${navItems.map((item) => `<button class="nav-button ${activeNav === item.screen ? "is-active" : ""}" type="button" data-action="goto-screen" data-screen="${item.screen}">${item.label}</button>`).join("")}
             </nav>
+            <div class="status-pod">
+              <span class="status-pill">Active cycle</span>
+              <span class="status-copy">Day ${activeDayNumber()} of ${data.days.length}</span>
+            </div>
           </div>
         </header>
       `;
     }
 
     function renderScreen() {
-      if (state.screen === "track") return renderTrack();
-      if (state.screen === "equalizer") return renderEqualizer();
-      if (state.screen === "ladders") return renderLadders();
-      if (state.screen === "practice") return renderPractice();
-      if (state.screen === "rollout") return renderRollout();
-      if (state.screen === "arrival") return renderArrival();
-      if (state.screen === "trauma") return renderTrauma();
-      return renderDesk();
+      switch (state.screen) {
+        case "track": return renderTrackScreen();
+        case "equalizer": return renderEqualizerScreen();
+        case "ladders": return renderLadderScreen();
+        case "practice": return renderPracticeScreen();
+        case "rollout": return renderRolloutScreen();
+        case "arrival": return renderArrivalScreen();
+        case "trauma": return renderTraumaScreen();
+        default: return renderDeskScreen();
+      }
     }
 
-    function renderDesk() {
+    function renderDeskScreen() {
+      const nextDay = data.days.find((day) => day.num === activeDayNumber()) || data.days[0];
       return `
         <section class="screen">
-          <div class="hero-card">
-            <div>
-              <div class="eyebrow">Teacher-Ready Playbook</div>
-              <h1 class="display">R³.A.P. Studio</h1>
-              <h2 class="hero-headline">Grounded coaching for establishing classroom rhythm, focusing on present-moment signals.</h2>
-              <p class="hero-copy">Rhythm requires structure. Establish clear moves to build a predictable, safe classroom environment without excavating origin stories.</p>
-              <div class="chip-row">
-                <span class="chip">Grade 5 Rollout</span>
-                <span class="chip">Present-Moment Focus</span>
+          <section class="hero-card">
+            <div class="hero-grid">
+              <div>
+                <div class="eyebrow">Teacher-ready playbook</div>
+                <h1 class="display">The Studio Desk</h1>
+                <h2 class="hero-headline">Grounded coaching for building classroom rhythm one clear move at a time.</h2>
+                <p class="hero-copy">Focus on present-moment bodily signals and circumstances to build safety, predictability, and genuine connection. Rhythm requires structure before flow.</p>
+                <div class="chip-row" style="margin-top:18px;">
+                  <span class="chip">Grade 5 rollout</span>
+                  <span class="chip is-warm">R³ Model Focus</span>
+                  <span class="chip">Hip hop informed</span>
+                </div>
+                <div class="hero-actions">
+                  <button class="button-primary" type="button" data-action="goto-screen" data-screen="rollout">Open today's rollout</button>
+                  <button class="button-secondary" type="button" data-action="open-track" data-track="seats">Load track 01</button>
+                  <button class="button-ghost" type="button" data-action="goto-screen" data-screen="equalizer">Open equalizer</button>
+                </div>
               </div>
-              <div class="hero-actions">
-                <button class="button-primary" data-action="goto" data-target="rollout">Open Today's Rollout</button>
-                <button class="button-secondary" data-action="goto" data-target="equalizer">Equalizer</button>
+              <div class="hero-media">
+                <div class="hero-image-wrap">${renderArtPanel("Cypher Energy", "Bright coaching with rhythm, structure, and room to breathe.")}</div>
+                <div class="hero-note">
+                  <div class="mini-kicker">Current focus</div>
+                  <p><strong>${nextDay.label}</strong> - ${nextDay.focus}</p>
+                  <p>Teacher tone: calm, clear, and regulated. If the room is not improving, tighten consistency instead of adding more words.</p>
+                </div>
               </div>
             </div>
-            <div class="hero-note">
-              <div class="mini-kicker">Coach's Note</div>
-              <p>Teacher tone: calm, clear, and regulated. If the room is not improving, tighten consistency instead of adding more words.</p>
-            </div>
-          </div>
+          </section>
 
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">Priority Expectations</div>
-              <h2 class="section-title">The 3 Tracks</h2>
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">Progress pulse</div><h2 class="section-title">Implementation Tracking</h2></div>
+              <p class="section-copy">Track your implementation. Rhythm requires consistency under pressure.</p>
             </div>
-            <p class="section-copy">Core routines to establish safety, predictability, and rhythm in your classroom.</p>
-          </div>
-          <div class="grid-three">
-            ${data.expectations.map(i => `
-              <div class="track-card">
-                <span class="track-card-meta">${i.side}</span>
-                <h3>${i.title}</h3>
-                <p>${i.hook}</p>
-                <button class="card-link" data-action="open-track" data-id="${i.id}">Open Track →</button>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">Fast Support</div>
-              <h2 class="section-title">Quick Paths</h2>
+            <div class="stat-grid" style="margin-top:18px;">
+              <div class="stat-card"><div class="stat-value">${completedActionCount()} / ${totalActionCount()}</div><div class="stat-label">Rollout actions logged</div></div>
+              <div class="stat-card"><div class="stat-value">${completedDayCount()} / ${data.days.length}</div><div class="stat-label">Days completed</div></div>
+              <div class="stat-card"><div class="stat-value">${reflections.length}</div><div class="stat-label">Reflection notes saved</div></div>
             </div>
-            <p class="section-copy">When the room moves faster than your plan, lean on these present-moment tools.</p>
-          </div>
-          <div class="grid-four">
-            <div class="quick-card cursor" data-action="goto" data-target="ladders"><span class="card-kicker">Ladders</span><h3>In The Booth</h3><p>If-then response chains.</p></div>
-            <div class="quick-card cursor" data-action="goto" data-target="practice"><span class="card-kicker">Sessions</span><h3>Practice</h3><p>Rehearse classroom moments.</p></div>
-            <div class="quick-card cursor" data-action="goto" data-target="arrival"><span class="card-kicker">Threshold</span><h3>Studio Entry</h3><p>The first 10 minutes.</p></div>
-            <div class="quick-card cursor" data-action="goto" data-target="trauma"><span class="card-kicker">Lens</span><h3>Trauma Lens</h3><p>Read the nervous system.</p></div>
-          </div>
+          </section>
 
-          <div class="spotlight">
+          <section class="screen">
+            <div class="section-head">
+              <div><div class="eyebrow">The 3 tracks</div><h2 class="section-title">Priority expectations</h2></div>
+              <p class="section-copy">Each track teaches one routine, one script, and one ladder to ensure classroom safety.</p>
+            </div>
+            <div class="grid-three">
+              ${data.expectations.map((item) => `
+                <button class="track-card ${item.side === "Phase 2" ? "is-side-b" : "is-side-a"}" type="button" data-action="open-track" data-track="${item.id}">
+                  <div class="track-card-meta">${item.side} - Track ${item.num}</div>
+                  <h3>${item.title}</h3>
+                  <p>${item.hook}</p>
+                  <span class="card-link">Open track -></span>
+                </button>
+              `).join("")}
+            </div>
+          </section>
+
+          <section class="screen">
+            <div class="section-head">
+              <div><div class="eyebrow">Jump in quickly</div><h2 class="section-title">The fastest support paths</h2></div>
+              <p class="section-copy">For the moments the room is moving faster than your planning.</p>
+            </div>
+            <div class="grid-four">
+              ${renderQuickCard("equalizer", "Equalizer", "Economy of language", "Name + direction + timeframe. Drill the pattern until it sounds natural.")}
+              ${renderQuickCard("ladders", "In The Booth", "If-then ladders", "Seat refusal, out-of-seat, and profanity ladders for real-time use.")}
+              ${renderQuickCard("practice", "Sessions", "Scenario practice", "Rehearse 5 classroom moments before you have to live them.")}
+              ${renderQuickCard("arrival", "Studio entry", "First 10 minutes", "A second-by-second walkthrough for threshold, Do Now, and launch.")}
+            </div>
+          </section>
+
+          <section class="spotlight">
+            <div class="spotlight-media">${renderArtPanel("Plural State", "From survival mode to a steadier, chosen rhythm.", true)}</div>
             <div>
-              <div class="eyebrow" style="border-color:var(--paper); color:var(--paper)">Hopeful Destination</div>
+              <div class="eyebrow" style="color:#f7ba52;">Hopeful destination</div>
               <h2 class="display">PLURAL</h2>
-              <p>The mastered flow. The room feels safer. The teacher sounds steadier. Students know what to do before the second reminder ever arrives. Shift from survival mode to a steadier, chosen rhythm.</p>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderTrack() {
-      const item = data.expectations.find(e => e.id === state.trackId);
-      return `
-        <section class="screen">
-          <button class="back-link" data-action="goto" data-target="desk">← Back to Studio</button>
-          <div class="section-head" style="margin-bottom:0; border:none;">
-            <div>
-              <div class="eyebrow">Track ${item.num}</div>
-              <h1 class="display">${item.title}</h1>
-              <p class="section-copy" style="margin-top:16px">${item.why}</p>
-            </div>
-          </div>
-          <div class="grid-two">
-            <div class="panel">
-              <div class="eyebrow">Student Steps</div>
-              <ul>${item.studentSteps.map(s => `<li>${s}</li>`).join('')}</ul>
-            </div>
-            <div class="script-card">
-              <span class="script-label">Teacher Script</span>
-              <div class="script-quote">"${item.teacherScript}"</div>
-              <p style="margin-top:24px; font-size:0.9rem; opacity:0.8">${item.frame}</p>
-            </div>
-          </div>
-          <div class="danger-card">
-            <div class="eyebrow">Traps to Avoid</div>
-            <ul>${item.dontSay.map(s => `<li>${s}</li>`).join('')}</ul>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderEqualizer() {
-      return `
-        <section class="screen">
-          <div class="formula-hero">
-            <div class="eyebrow" style="color:var(--paper); border-color:var(--paper);">Equalizer</div>
-            <h1 class="display">Check Your Levels</h1>
-            <p style="font-size:1.2rem; max-width:60ch; margin:24px auto;">Calm language keeps the room from borrowing your stress. This is the fast formula that keeps you regulated and the message clear.</p>
-            <div class="formula-line">
-              <div class="formula-token">Name</div> + <div class="formula-token">Direction</div> + <div class="formula-token">Timeframe</div>
-            </div>
-          </div>
-        </section>
-      `;
-    }
-
-    function renderLadders() {
-      const l = data.ladders[state.ladderId];
-      return `
-        <section class="screen">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">In The Booth</div>
-              <h1 class="display">Response Ladders</h1>
-            </div>
-          </div>
-          <div class="pill-tabs">
-            ${Object.keys(data.ladders).map(k => `<button class="pill-tab ${state.ladderId === k ? 'is-active' : ''}" data-action="set-ladder" data-id="${k}">${data.ladders[k].title}</button>`).join('')}
-          </div>
-          <div class="ladder">
-            ${l.rungs.map((r, i) => `
-              <div class="ladder-rung" style="${r.escalate ? 'border-left: 4px solid var(--accent)' : ''}">
-                <div class="ladder-number">${i+1}</div>
-                <div><div class="ladder-label">If</div><div>${r.if}</div></div>
-                <div><div class="ladder-label">Then</div><div>${r.then}</div></div>
+              <h3 class="section-title" style="margin-top:10px;">The Mastered Flow</h3>
+              <p style="margin-top:14px;">The room feels safer. The teacher sounds steadier. Students know what to do before the second reminder ever arrives. Move from survival to a rhythmic, chosen flow.</p>
+              <div class="hero-actions" style="margin-top:22px;">
+                <button class="button-primary" type="button" data-action="goto-screen" data-screen="trauma">Open trauma lens</button>
+                <button class="button-ghost" type="button" data-action="open-panic">Open reset scripts</button>
               </div>
-            `).join('')}
+            </div>
+          </section>
+        </section>
+      `;
+    }
+
+    function renderQuickCard(screen, kicker, title, copy) {
+      return `<button class="quick-card" type="button" data-action="goto-screen" data-screen="${screen}"><div class="card-kicker">${kicker}</div><h3>${title}</h3><p>${copy}</p><span class="card-link">Open -></span></button>`;
+    }
+
+    function renderTrackScreen() {
+      const item = data.expectations.find((entry) => entry.id === state.trackId);
+      const ladder = data.ladders[state.trackId];
+      if (!item) return `<section class="screen"><div class="empty-state">Track not found.</div></section>`;
+      const visualLabel = item.id === "language" ? "Language Reset" : "Practice Loop";
+      const visualCopy = item.id === "language" ? "Keep the response calm, clean, and school-safe." : "Repetition builds safety. Safety builds capacity.";
+
+      return `
+        <section class="screen track-layout">
+          <button class="back-link" type="button" data-action="goto-screen" data-screen="desk">&larr; Back to the studio desk</button>
+          <section class="hero-card">
+            <div class="hero-grid track-hero">
+              <div>
+                <div class="eyebrow">${item.side} - Track ${item.num}</div>
+                <h1 class="display">${item.side === "Phase 2" ? "Reset The Words" : "Set The Tone"}</h1>
+                <h2 class="hero-headline">${item.title}</h2>
+                <p class="hero-copy">${item.hook}</p>
+                <div class="hero-note" style="margin-top:18px;"><div class="mini-kicker">Why this track matters</div><p>${item.why}</p></div>
+              </div>
+              <div class="track-stage">${renderArtPanel(visualLabel, visualCopy)}</div>
+            </div>
+          </section>
+
+          <div class="grid-two">
+            <section class="panel">
+              <div class="eyebrow">Student-facing</div>
+              <h3>What students do</h3>
+              <div class="track-bullet-list" style="margin-top:16px;">
+                ${item.studentSteps.map((step, index) => `<div class="bullet-row"><span class="bullet-index">${String(index + 1).padStart(2, "0")}</span><div>${step}</div></div>`).join("")}
+              </div>
+            </section>
+            <section class="panel">
+              <div class="eyebrow">Teacher script</div>
+              <h3>What you say when you teach it</h3>
+              <div class="script-card" style="margin-top:16px;">
+                <div class="script-label">Say this</div>
+                <div class="script-quote">${item.teacherScript}</div>
+              </div>
+              <div class="hero-note" style="margin-top:16px;"><div class="mini-kicker">Coaching frame</div><p>${item.frame}</p></div>
+            </section>
+          </div>
+
+          <div class="grid-two">
+            <section class="danger-card">
+              <div class="eyebrow">Avoid</div>
+              <h3>Common traps</h3>
+              <ul>${item.dontSay.map((text) => `<li>${text}</li>`).join("")}</ul>
+            </section>
+            <section class="panel">
+              <div class="eyebrow">Response ladder</div>
+              <h3>${ladder.title}</h3>
+              <p style="margin-top:8px;">Start light. Escalate only when needed. Work the rung instead of improvising.</p>
+            </section>
+          </div>
+
+          ${item.replacementPhrases ? `
+            <section class="panel">
+              <div class="eyebrow">Post in room</div>
+              <h3>Replacement phrases students can actually use</h3>
+              <div class="grid-three" style="margin-top:16px;">
+                ${item.replacementPhrases.map((phrase) => `<div class="quick-card"><div class="mini-kicker">Instead of profanity</div><h3 style="font-size:1.18rem;">${phrase}</h3></div>`).join("")}
+              </div>
+            </section>
+          ` : ""}
+
+          <section class="panel">
+            <div class="eyebrow">If then</div>
+            <h3>${ladder.title}</h3>
+            <div class="ladder" style="margin-top:16px;">
+              ${ladder.rungs.map((rung, index) => `
+                <div class="ladder-rung ${rung.escalate ? "is-escalated" : ""}">
+                  <div class="ladder-number">${String(index + 1).padStart(2, "0")}</div>
+                  <div><div class="ladder-label">If</div><div class="ladder-text">${rung.if}</div></div>
+                  <div><div class="ladder-label">Then</div><div class="ladder-text">${rung.then}</div></div>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+        </section>
+      `;
+    }
+
+    function renderEqualizerScreen() {
+      return `
+        <section class="screen">
+          <section class="formula-hero">
+            <div class="eyebrow" style="color:#f7ba52;">Equalizer</div>
+            <h1 class="display">Check Your Levels</h1>
+            <h2 class="hero-headline" style="color:#fff; margin-top:10px;">Calm language keeps the room from borrowing your stress.</h2>
+            <p class="hero-copy" style="color:rgba(255,255,255,0.85); max-width:52ch;">Maintain a sharp correction pattern to stay regulated and keep the message clear.</p>
+            <div class="formula-line">
+              <span class="formula-token">Name</span><span>+</span><span class="formula-token">Direction</span><span>+</span><span class="formula-token">Timeframe</span>
+            </div>
+          </section>
+
+          <section class="screen">
+            <div class="section-head">
+              <div><div class="eyebrow">Examples</div><h2 class="section-title">What it sounds like in motion</h2></div>
+              <p class="section-copy">Shorter does not mean colder. It means clearer and safer.</p>
+            </div>
+            <div class="grid-three">
+              ${data.economyExamples.map((item) => `
+                <div class="quick-card"><div class="card-kicker">${item.when}</div><h3 style="font-size:1.14rem;">"${item.script}"</h3></div>
+              `).join("")}
+            </div>
+          </section>
+
+          <div class="grid-two">
+            <section class="panel"><div class="eyebrow">Do</div><h3>Protect clarity</h3><ul><li>Give one direction at a time.</li><li>Use the fewest words possible.</li><li>Say the direction once, then monitor.</li><li>Correct quietly unless safety requires public.</li><li>Follow through every time.</li></ul></section>
+            <section class="danger-card"><div class="eyebrow">Do not</div><h3>Accidentally feed the chaos</h3><ul><li>Do not explain during noncompliance.</li><li>Do not debate seat assignments.</li><li>Do not lecture when correcting profanity.</li><li>Do not match the student's emotional intensity.</li><li>Do not call out across the room.</li></ul></section>
           </div>
         </section>
       `;
     }
 
-    function renderPractice() {
-      const s = data.scenarios[state.scenarioIndex];
+    function renderLadderScreen() {
+      const current = data.ladders[state.ladderId];
+      const tabs = [{ id: "seats", label: "Seat refusal" }, { id: "seated", label: "Out of seat" }, { id: "language", label: "Profanity" }];
       return `
         <section class="screen">
-          <div class="scenario-card">
-            <div class="eyebrow">Practice Sessions</div>
-            <h2 class="section-title">Scenario ${state.scenarioIndex + 1}</h2>
-            <p class="scenario-setup">${s.setup}</p>
-            <div class="scenario-student"><strong>Student: </strong>${s.studentSays}</div>
-            <div>
-              ${s.choices.map((c, i) => {
-                const isSel = state.selectedChoiceIndex === i;
-                const isAns = state.selectedChoiceIndex !== null;
-                const cls = isAns && c.correct ? "is-correct" : (isAns && isSel && !c.correct ? "is-wrong" : "");
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">In The Booth</div><h1 class="section-title">If-then response ladders</h1></div>
+              <p class="section-copy">When the moment comes, do not improvise. Work the rung. Escalate only when the previous move did not land.</p>
+            </div>
+            <div class="pill-tabs" style="margin-top:18px;">
+              ${tabs.map((tab) => `<button class="pill-tab ${state.ladderId === tab.id ? "is-active" : ""}" type="button" data-action="switch-ladder" data-ladder="${tab.id}">${tab.label}</button>`).join("")}
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="eyebrow">Current ladder</div>
+            <h2 class="section-title">${current.title}</h2>
+            <div class="ladder" style="margin-top:18px;">
+              ${current.rungs.map((rung, index) => `
+                <div class="ladder-rung ${rung.escalate ? "is-escalated" : ""}">
+                  <div class="ladder-number">${String(index + 1).padStart(2, "0")}</div>
+                  <div><div class="ladder-label">If</div><div class="ladder-text">${rung.if}</div></div>
+                  <div><div class="ladder-label">Then</div><div class="ladder-text">${rung.then}</div></div>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+        </section>
+      `;
+    }
+
+    function renderPracticeScreen() {
+      const scenario = data.scenarios[state.scenarioIndex];
+      const ladder = data.ladders[scenario.ladder];
+      return `
+        <section class="screen">
+          <section class="scenario-card">
+            <div class="section-head">
+              <div><div class="eyebrow">Sessions</div><h1 class="section-title">Scenario practice</h1></div>
+              <div class="chip">Scenario ${state.scenarioIndex + 1} of ${data.scenarios.length}</div>
+            </div>
+            <p class="scenario-setup">${scenario.setup}</p>
+            <div class="scenario-student"><strong>Student says or does</strong><div>${scenario.studentSays}</div></div>
+            <div class="choice-list">
+              ${scenario.choices.map((choice, index) => {
+                const selected = state.selectedChoiceIndex === index;
+                const answered = state.selectedChoiceIndex !== null;
+                const className = answered && choice.correct ? "choice-button is-correct" : answered && selected && !choice.correct ? "choice-button is-wrong" : "choice-button";
+                const showFeedback = answered && (selected || choice.correct);
                 return `
-                  <button class="choice-button ${cls}" data-action="pick" data-idx="${i}">
-                    <div class="choice-key">${String.fromCharCode(65+i)}</div>
-                    <div>
-                      <div style="font-size:1.1rem; font-weight:500;">${c.text}</div>
-                      ${isAns && (isSel || c.correct) ? `<div style="margin-top:8px; color:var(--ink-soft); font-size:0.9rem;">↳ ${c.feedback}</div>` : ''}
-                    </div>
+                  <button class="${className}" type="button" data-action="choose-scenario" data-choice="${index}">
+                    <div class="choice-top"><span class="choice-key">${String.fromCharCode(65 + index)}</span><div><div>${choice.text}</div>${showFeedback ? `<div class="choice-feedback">${choice.feedback}</div>` : ""}</div></div>
                   </button>
                 `;
-              }).join('')}
+              }).join("")}
             </div>
-            <div style="margin-top:24px; display:flex; gap:16px;">
-              <button class="button-ghost" data-action="reset-scen">Reset</button>
-              <button class="button-primary" data-action="next-scen">Next Scenario</button>
+            ${state.selectedChoiceIndex !== null ? `
+              <section class="panel" style="margin-top: 24px;">
+                <div class="eyebrow">Connected ladder</div>
+                <h3>${ladder.title}</h3>
+                <p style="margin-top:8px;">If this moment keeps escalating, these are the moves you work through next.</p>
+                <div class="ladder" style="margin-top:16px;">
+                  ${ladder.rungs.slice(0, 3).map((rung, index) => `
+                    <div class="ladder-rung ${rung.escalate ? "is-escalated" : ""}">
+                      <div class="ladder-number">${String(index + 1).padStart(2, "0")}</div>
+                      <div><div class="ladder-label">If</div><div class="ladder-text">${rung.if}</div></div>
+                      <div><div class="ladder-label">Then</div><div class="ladder-text">${rung.then}</div></div>
+                    </div>
+                  `).join("")}
+                </div>
+              </section>
+            ` : ""}
+            <div class="row-actions" style="margin-top: 24px;">
+              <button class="button-ghost" type="button" data-action="retry-scenario">Try again</button>
+              <button class="button-primary" type="button" data-action="next-scenario">Next scenario</button>
             </div>
-          </div>
+          </section>
         </section>
       `;
     }
 
-    function renderRollout() {
-      const d = data.days.find(x => x.num === state.selectedDay);
-      const rec = getRecord(d.num);
+    function renderRolloutScreen() {
+      const day = data.days.find((entry) => entry.num === state.selectedDay) || data.days[0];
+      const record = getDayRecord(day.num);
       return `
         <section class="screen">
-          <div class="section-head">
-            <div>
-              <div class="eyebrow">Implementation</div>
-              <h1 class="display">4-Day Tracker</h1>
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">Rollout</div><h1 class="section-title">4-day tracker</h1></div>
+              <p class="section-copy">Reveal it on Day 1. Resist explaining on Day 2. Reflect on Day 3. Watch it hold on Day 4.</p>
             </div>
-            <p class="section-copy">Reveal. Resist. Reflect. Watch it hold.</p>
-          </div>
-          <div class="pill-tabs">
-            ${data.days.map(x => `<button class="pill-tab ${state.selectedDay === x.num ? 'is-active' : ''}" data-action="set-day" data-id="${x.num}">${x.label}</button>`).join('')}
-          </div>
-          <div class="grid-two">
-            <div class="panel">
-              <h2 style="margin-bottom:24px;">${d.focus}</h2>
-              <div class="script-card" style="margin: 0 0 24px 0; padding: 24px;">
-                <span class="script-label">Today's Script</span>
-                <div class="script-quote">"${d.script}"</div>
-              </div>
-              <div>
-                ${d.actions.map((a, i) => `
-                  <button class="check-row ${rec.actions[i] ? 'is-done' : ''}" data-action="toggle" data-idx="${i}">
-                    <div class="check-box">${rec.actions[i] ? '✓' : ''}</div>
-                    <div class="check-copy">${a}</div>
+            <div class="days-grid" style="margin-top:18px;">
+              ${data.days.map((entry) => {
+                const entryRecord = getDayRecord(entry.num);
+                const isDone = entryRecord.actions.filter(Boolean).length >= entry.actions.length;
+                const isActive = state.selectedDay === entry.num;
+                return `
+                  <button class="day-card ${isActive ? "is-active" : ""} ${isDone ? "is-done" : ""}" type="button" data-action="select-day" data-day="${entry.num}">
+                    <div class="card-kicker">${entry.label}</div>
+                    <h3 style="font-size:1.12rem;">${entry.focus}</h3>
+                    <p>${entryRecord.actions.filter(Boolean).length} / ${entry.actions.length} actions logged</p>
                   </button>
-                `).join('')}
-              </div>
+                `;
+              }).join("")}
             </div>
-            <div class="panel">
-              <div class="eyebrow">Reflect</div>
-              <ul style="margin-bottom:24px;">${d.reflectPrompts.map(p => `<li>${p}</li>`).join('')}</ul>
-              <textarea class="reflection-textarea" id="ref-input" placeholder="Jot present-moment observations here...">${rec.reflection || ""}</textarea>
-              <button class="button-primary" style="margin-top:16px" data-action="save-ref">Save Note</button>
-            </div>
-          </div>
-        </section>
-      `;
-    }
+          </section>
 
-    function renderArrival() {
-      return `
-        <section class="screen">
-          <div class="section-head"><div><div class="eyebrow">Threshold</div><h1 class="display">The First 10 Mins</h1></div></div>
-          <div class="timeline">
-            ${data.arrival.map(a => `
-              <div class="timeline-card">
-                <div class="eyebrow">${a.time}</div>
-                <h3>${a.title}</h3>
-                <p style="color:var(--ink-soft); margin-top:8px;">${a.body}</p>
-              </div>
-            `).join('')}
-          </div>
-        </section>
-      `;
-    }
-
-    function renderTrauma() {
-      return `
-        <section class="screen">
-          <div class="section-head"><div><div class="eyebrow">Trauma Lens</div><h1 class="display">Read The System</h1></div></div>
           <div class="grid-two">
-            ${data.trauma.map(t => `
-              <div class="panel">
-                <h3 style="margin-bottom:12px">${t.title}</h3>
-                <p style="margin-bottom:16px">${t.summary}</p>
-                <div class="eyebrow">Strategy</div><p>${t.strategy}</p>
+            <section class="reflection-card">
+              <div class="eyebrow">${day.label}</div>
+              <h3>${day.focus}</h3>
+              <div class="script-card" style="margin-top:16px;">
+                <div class="script-label">Teacher script for today</div>
+                <div class="script-quote">${day.script}</div>
               </div>
-            `).join('')}
+              <div class="checklist" style="margin-top:18px;">
+                ${day.actions.map((action, index) => `
+                  <button class="check-row ${record.actions[index] ? "is-done" : ""}" type="button" data-action="toggle-rollout" data-day="${day.num}" data-index="${index}">
+                    <span class="check-box">${record.actions[index] ? "&#10003;" : ""}</span><span class="check-copy">${action}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </section>
+
+            <section class="reflection-card">
+              <div class="eyebrow">End of class</div>
+              <h3>What did the room teach you?</h3>
+              <div class="prompt-list" style="margin-top:16px;">
+                ${day.reflectPrompts.map((prompt, index) => `
+                  <div class="prompt-item"><span class="prompt-index">${String(index + 1).padStart(2, "0")}</span><div>${prompt}</div></div>
+                `).join("")}
+              </div>
+              <textarea class="reflection-textarea" data-action="reflection-input" data-day="${day.num}" placeholder="Jot what you noticed. Which script felt easy? What bodily signals were present?"></textarea>
+              <div class="hero-actions" style="margin-top:16px;">
+                <button class="button-primary" type="button" data-action="save-reflection" data-day="${day.num}">Save reflection</button>
+              </div>
+            </section>
           </div>
+
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">Reflection log</div><h2 class="section-title">What is compounding</h2></div>
+              <p class="section-copy">An honest memory of what worked and what did not.</p>
+            </div>
+            ${reflections.length === 0 ? `
+              <div class="empty-state" style="margin-top:18px;">No reflection entries yet. Save your first note from the tracker above.</div>
+            ` : `
+              <div class="reflection-log" style="margin-top:18px;">
+                ${reflections.slice(0, 8).map((entry) => `
+                  <div class="reflection-entry">
+                    <div class="reflection-date">Day ${entry.day} - ${entry.date}</div>
+                    <div class="reflection-copy">${escapeHtml(entry.text)}</div>
+                  </div>
+                `).join("")}
+              </div>
+            `}
+          </section>
         </section>
       `;
     }
 
-    function renderPanic() {
+    function renderArrivalScreen() {
       return `
-        <div style="position:fixed; inset:0; background:rgba(250,250,250,0.9); z-index:50; padding:40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-          <div style="max-width:600px; width:100%; border:var(--border-thick); background:var(--paper); padding:48px;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:var(--border-thick); padding-bottom:24px; margin-bottom:24px;">
-              <div>
-                <div class="eyebrow">R³ Reset</div>
-                <h2 class="display" style="font-size:2.5rem">One Breath.</h2>
-              </div>
-              <button class="button-ghost" style="padding:0; height:auto; text-decoration:none; font-size:2rem;" data-action="close-panic">×</button>
+        <section class="screen">
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">Arrival walkthrough</div><h1 class="section-title">The first 10 minutes</h1></div>
+              <p class="section-copy">If students enter before the room is ready, you start from behind. Make the room tell them what to do before you have to.</p>
             </div>
-            ${data.panicScripts.map(p => `
-              <div style="padding:16px; border-left:4px solid var(--accent); background:var(--bg); margin-bottom:16px;">
-                <div class="mini-kicker">${p.label}</div>
-                <div style="font-size:1.2rem; font-weight:500;">"${p.script}"</div>
-              </div>
-            `).join('')}
+          </section>
+          <section class="timeline">
+            ${data.arrival.map((step) => `
+              <article class="timeline-card"><div class="timeline-time">${step.time}</div><h2 class="timeline-title">${step.title}</h2><div class="timeline-body">${step.body}</div></article>
+            `).join("")}
+          </section>
+        </section>
+      `;
+    }
+
+    function renderTraumaScreen() {
+      return `
+        <section class="screen">
+          <section class="panel">
+            <div class="section-head">
+              <div><div class="eyebrow">Trauma lens</div><h1 class="section-title">Read the nervous system</h1></div>
+              <p class="section-copy">Recognizing the pattern tells you what correction will not work and what might land with dignity.</p>
+            </div>
+          </section>
+          <section class="lens-grid">
+            ${data.trauma.map((lens) => `
+              <article class="lens-card"><h3>${lens.title}</h3><div class="lens-copy"><div>${lens.summary}</div><div class="lens-label">Strategy</div><div>${lens.strategy}</div><div class="lens-label">What to watch for</div><div>${lens.watch}</div></div></article>
+            `).join("")}
+          </section>
+        </section>
+      `;
+    }
+
+    function renderPanicOverlay() {
+      return `
+        <div class="panic-overlay" ${state.panicOpen ? "" : "hidden"}>
+          <div class="panic-sheet" role="dialog" aria-modal="true" aria-label="Reset scripts">
+            <div class="panic-head">
+              <div><div class="eyebrow">Reset</div><h2 class="section-title">Breathe. One direction.</h2><p class="section-copy" style="margin-top:6px;">The room is reading you. Be the calmest thing in it. Pick the script that fits.</p></div>
+              <button class="close-button" type="button" data-action="close-panic" aria-label="Close reset overlay">&times;</button>
+            </div>
+            <div class="breath-orb"></div>
+            <div class="panic-breath">Breathe in - hold - breathe out</div>
+            <div class="panic-script-list">
+              ${data.panicScripts.map((item) => `<div class="panic-script"><div class="mini-kicker">${item.label}</div><p>"${item.script}"</p></div>`).join("")}
+            </div>
           </div>
         </div>
       `;
     }
 
-    appRoot.addEventListener('click', e => {
-      const t = e.target.closest('[data-action]');
-      if (!t) return;
-      const act = t.dataset.action;
+    function renderArtPanel(label, copy, spotlight = false) {
+      return `
+        <div class="art-panel ${spotlight ? "is-spotlight" : ""}" aria-hidden="true">
+          <div class="art-panel-inner">
+            <div class="art-panel-band is-top"></div><div class="art-panel-band is-middle"></div><div class="art-panel-band is-bottom"></div>
+            <div class="art-panel-copy"><strong>${label}</strong><span>${copy}</span></div>
+          </div>
+        </div>
+      `;
+    }
 
-      if (act === "goto") { state.screen = t.dataset.target; window.scrollTo(0,0); render(); }
-      if (act === "open-track") { state.trackId = t.dataset.id; state.screen = "track"; window.scrollTo(0,0); render(); }
-      if (act === "set-ladder") { state.ladderId = t.dataset.id; render(); }
-      if (act === "pick" && state.selectedChoiceIndex === null) { state.selectedChoiceIndex = Number(t.dataset.idx); render(); }
-      if (act === "next-scen") { state.scenarioIndex = (state.scenarioIndex + 1) % data.scenarios.length; state.selectedChoiceIndex = null; render(); }
-      if (act === "reset-scen") { state.selectedChoiceIndex = null; render(); }
-      if (act === "set-day") { state.selectedDay = Number(t.dataset.id); render(); }
-      if (act === "toggle") { 
-        let r = getRecord(state.selectedDay); 
-        r.actions[t.dataset.idx] = !r.actions[t.dataset.idx]; 
-        progress[state.selectedDay] = r; save(); render(); 
+    function openScreen(screen) { state.screen = screen; if (screen === "rollout") { state.selectedDay = activeDayNumber(); } window.scrollTo({ top: 0, behavior: "smooth" }); render(); }
+    function openTrack(trackId) { state.trackId = trackId; state.screen = "track"; window.scrollTo({ top: 0, behavior: "smooth" }); render(); }
+
+    appRoot.addEventListener("click", (event) => {
+      if (event.target.classList.contains("panic-overlay")) { state.panicOpen = false; render(); return; }
+      const target = event.target.closest("[data-action]");
+      if (!target) return;
+      const { action } = target.dataset;
+
+      if (action === "goto-screen") { openScreen(target.dataset.screen); return; }
+      if (action === "open-track") { openTrack(target.dataset.track); return; }
+      if (action === "switch-ladder") { state.ladderId = target.dataset.ladder; render(); return; }
+      if (action === "choose-scenario") { if (state.selectedChoiceIndex === null) { state.selectedChoiceIndex = Number(target.dataset.choice); render(); } return; }
+      if (action === "retry-scenario") { state.selectedChoiceIndex = null; render(); return; }
+      if (action === "next-scenario") { state.scenarioIndex = (state.scenarioIndex + 1) % data.scenarios.length; state.selectedChoiceIndex = null; render(); return; }
+      if (action === "select-day") { state.selectedDay = Number(target.dataset.day); render(); return; }
+      if (action === "toggle-rollout") {
+        const dayNum = Number(target.dataset.day); const actionIndex = Number(target.dataset.index);
+        const record = getDayRecord(dayNum); record.actions[actionIndex] = !record.actions[actionIndex];
+        setDayRecord(dayNum, record); render(); return;
       }
-      if (act === "save-ref") {
-        let r = getRecord(state.selectedDay);
-        r.reflection = document.getElementById('ref-input').value;
-        progress[state.selectedDay] = r; save(); render();
+      if (action === "save-reflection") {
+        const dayNum = Number(target.dataset.day); const record = getDayRecord(dayNum);
+        const input = document.querySelector(`textarea[data-day="${dayNum}"]`);
+        const text = input ? input.value.trim() : "";
+        if (!text) return;
+        reflections = [{ day: dayNum, date: new Date().toLocaleDateString(), text }, ...reflections];
+        saveReflections(); setDayRecord(dayNum, { ...record, reflection: "" }); render(); return;
       }
-      if (act === "open-panic") { state.panicOpen = true; render(); }
-      if (act === "close-panic") { state.panicOpen = false; render(); }
+      if (action === "open-panic") { state.panicOpen = true; render(); return; }
+      if (action === "close-panic") { state.panicOpen = false; render(); }
     });
+
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape" && state.panicOpen) { state.panicOpen = false; render(); } });
 
     render();
   </script>
