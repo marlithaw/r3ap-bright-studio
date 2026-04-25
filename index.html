@@ -3,14 +3,1043 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R3.A.P. Bright Studio</title>
+  <title>R³ Agency Practice | Bright Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Jost:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAFA;
+      --paper: #FFFFFF;
+      --ink: #111827;
+      --ink-soft: #4B5563;
+      --line: #E5E7EB;
+      --line-strong: #111827;
+      --accent: #FF4500; /* Sharp, energetic vermilion */
+      --accent-soft: #FFF0EB;
+      --teal: #0F766E;
+      --radius-xl: 0px; /* Sharp corners for editorial feel */
+      --radius-lg: 0px;
+      --radius-md: 0px;
+      --radius-sm: 0px;
+      --border-thick: 2px solid var(--ink);
+      --border-thin: 1px solid var(--ink);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      position: relative;
+      line-height: 1.6;
+    }
+
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; border: 0; background: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    h1, h2, h3, h4, .display {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .shell { min-height: 100vh; }
+
+    /* --- TOPBAR --- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--paper);
+      border-bottom: var(--border-thin);
+    }
+
+    .topbar-inner {
+      width: min(1240px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border: var(--border-thin);
+    }
+
+    .brand-text { display: flex; flex-direction: column; }
+    
+    .brand-title {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .nav-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .nav-button {
+      padding: 8px 16px;
+      border: var(--border-thin);
+      background: transparent;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-button:hover {
+      background: var(--line);
+    }
+
+    .nav-button.is-active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .status-pod {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px;
+      border: var(--border-thin);
+      background: var(--paper);
+    }
+
+    .status-pill {
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .status-copy { font-size: 0.9rem; font-weight: 600; }
+
+    /* --- LAYOUT --- */
+    .main-shell {
+      width: min(1240px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 96px;
+    }
+
+    .screen {
+      display: grid;
+      gap: 40px;
+      animation: rise 0.4s ease;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- COMPONENTS --- */
+    .hero-card {
+      background: var(--paper);
+      border: var(--border-thick);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    .display {
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      margin: 24px 0 16px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: var(--ink-soft);
+      font-weight: 500;
+      font-family: "Inter", sans-serif;
+    }
+
+    .hero-copy {
+      font-size: 1.1rem;
+      color: var(--ink);
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .button-primary, .button-secondary, .button-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 24px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: var(--border-thick);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .button-primary {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .button-primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .button-secondary {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .button-secondary:hover {
+      background: var(--line);
+    }
+
+    .button-ghost {
+      border: 1px solid transparent;
+      color: var(--ink);
+      text-decoration: underline;
+    }
+    .button-ghost:hover {
+      color: var(--accent);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border: var(--border-thin);
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      background: var(--bg);
+    }
+
+    .hero-media { display: grid; gap: 20px; }
+
+    .hero-note {
+      padding: 24px;
+      border: var(--border-thin);
+      background: var(--accent-soft);
+    }
+
+    .mini-kicker {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .grid-two { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .grid-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    .section-head {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: var(--border-thick);
+      padding-bottom: 16px;
+    }
+
+    .section-title { font-size: 2.5rem; text-transform: uppercase; }
+    .section-copy { font-size: 1.1rem; color: var(--ink-soft); max-width: 50ch; margin: 0; }
+
+    .panel, .track-card, .quick-card, .day-card, .stat-card {
+      background: var(--paper);
+      border: var(--border-thin);
+      padding: 32px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .track-card:hover, .quick-card:hover, .day-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 4px 4px 0px var(--ink);
+    }
+
+    .card-kicker, .track-card-meta {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .track-card h3, .quick-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .track-card p, .quick-card p { color: var(--ink-soft); margin-bottom: 24px; }
+    
+    .card-link {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .stat-value { font-size: 3.5rem; font-family: "Space Grotesk", sans-serif; font-weight: 700; line-height: 1; }
+    .stat-label { margin-top: 12px; font-size: 1rem; color: var(--ink-soft); text-transform: uppercase; font-family: "DM Mono", monospace; }
+
+    .spotlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      padding: 48px;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .spotlight .display { color: var(--accent); }
+    .spotlight .section-title, .spotlight p { color: var(--paper); }
+    .spotlight p { font-size: 1.1rem; opacity: 0.9; margin-top: 16px; }
+
+    .back-link {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .track-hero { padding: 0; border: none; background: transparent; }
+    
+    .script-card {
+      padding: 32px;
+      border: var(--border-thin);
+      background: var(--ink);
+      color: var(--paper);
+      margin-top: 24px;
+    }
+    .script-label {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .script-quote { font-size: 1.25rem; font-style: italic; line-height: 1.5; }
+
+    .danger-card {
+      padding: 32px;
+      border: var(--border-thin);
+      background: #FFF5F5;
+    }
+    
+    ul { padding-left: 20px; color: var(--ink-soft); margin-top: 16px; }
+    li { margin-bottom: 8px; }
+
+    .ladder { display: grid; gap: 16px; margin-top: 24px; }
+    .ladder-rung {
+      display: grid;
+      grid-template-columns: 48px 1fr 1fr;
+      gap: 24px;
+      padding: 24px;
+      border: var(--border-thin);
+      background: var(--paper);
+      align-items: start;
+    }
+    .ladder-number { font-size: 1.5rem; font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+    .ladder-label { font-family: "DM Mono", monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+
+    .formula-hero {
+      padding: 48px;
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+    }
+    .formula-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .formula-token {
+      padding: 16px 24px;
+      border: 1px solid var(--paper);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+    }
+
+    .scenario-card { padding: 48px; border: var(--border-thick); background: var(--paper); }
+    .scenario-setup { font-size: 1.2rem; margin-bottom: 24px; }
+    .scenario-student {
+      padding: 24px;
+      border-left: 4px solid var(--accent);
+      background: var(--bg);
+      margin-bottom: 32px;
+    }
+    .choice-button {
+      padding: 24px;
+      border: var(--border-thin);
+      background: var(--paper);
+      text-align: left;
+      margin-bottom: 16px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 16px;
+    }
+    .choice-key {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--border-thin);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+    .choice-button.is-correct { background: #F0FDF4; border-color: #166534; }
+    .choice-button.is-wrong { background: #FEF2F2; border-color: #991B1B; }
+
+    .reflection-textarea {
+      width: 100%;
+      min-height: 160px;
+      padding: 24px;
+      border: var(--border-thin);
+      background: var(--paper);
+      font-family: "Inter", sans-serif;
+      margin-top: 24px;
+      resize: vertical;
+    }
+    .reflection-textarea:focus { outline: none; border-color: var(--accent); }
+
+    .panic-fab {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 18;
+      padding: 16px 24px;
+      background: var(--accent);
+      color: var(--paper);
+      border: var(--border-thick);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: flex;
+      gap: 12px;
+      box-shadow: 4px 4px 0px var(--ink);
+    }
+    .panic-fab:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--ink); }
+
+    .timeline { padding-left: 32px; border-left: 2px solid var(--ink); margin-left: 16px; }
+    .timeline-card {
+      position: relative;
+      padding: 0 0 32px 32px;
+    }
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      left: -41px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: var(--paper);
+      border: 4px solid var(--ink);
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border: var(--border-thin);
+      margin-bottom: 8px;
+      width: 100%;
+      text-align: left;
+    }
+    .check-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check-row.is-done .check-box { background: var(--ink); color: var(--paper); }
+    .check-row.is-done .check-copy { text-decoration: line-through; color: var(--ink-soft); }
+
+    .pill-tabs { display: flex; gap: 12px; margin-bottom: 32px; border-bottom: var(--border-thin); padding-bottom: 16px; }
+    .pill-tab { font-family: "Space Grotesk", sans-serif; font-size: 1.1rem; text-transform: uppercase; color: var(--ink-soft); }
+    .pill-tab.is-active { color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--accent); }
+
+    @media (max-width: 1024px) {
+      .hero-card, .spotlight { grid-template-columns: 1fr; padding: 32px; }
+      .grid-four, .grid-three { grid-template-columns: repeat(2, 1fr); }
+      .section-head { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 768px) {
+      .grid-two, .grid-three, .grid-four { grid-template-columns: 1fr; }
+      .ladder-rung { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
-  <script src="./app.js"></script>
+
+  <script>
+    const data = {
+      expectations: [
+        {
+          id: "seats",
+          num: "01",
+          title: "Enter and go directly to your assigned seat",
+          side: "Phase 1",
+          hook: "Stops the doorway chaos and creates a predictable threshold.",
+          studentSteps: [
+            "Walk into the room.",
+            "Look at the board or posted seat chart.",
+            "Go directly to your assigned seat.",
+            "Sit down.",
+            "Start the Do Now silently."
+          ],
+          teacherScript: "When you enter this room, there are five steps. Walk in. Find your assigned seat. Sit down. Start the Do Now. Stay silent unless I say otherwise. We are going to practice that until it is automatic.",
+          frame: "Assigned seats are a classroom regulation tool. They lower social ignition and help you monitor quickly. Focus on the present-moment expectation.",
+          dontSay: [
+            "Please sit down, everybody.",
+            "How many times do I have to tell y'all?",
+            "Come on, guys, settle down."
+          ],
+          why: "Long explanations are easily ignored. A specific direction to a specific student, said once, lands perfectly."
+        },
+        {
+          id: "seated",
+          num: "02",
+          title: "Remain in your seat unless given permission",
+          side: "Phase 1",
+          hook: "Keeps the body of the class intact. You move, they do not.",
+          studentSteps: [
+            "Stay in your assigned seat during work time.",
+            "Raise your hand or use the class signal if you need help.",
+            "Keep working while waiting.",
+            "Move only when the teacher gives permission."
+          ],
+          teacherScript: "During class, your seat is your workspace. If you need something, do not get up. Raise your hand or use the signal. I will come to you.",
+          frame: "If you answer the student who walked up first, you just taught the wrong system. Reward the signal, not the stand.",
+          dontSay: [
+            "What are you doing out of your seat?",
+            "Sit down, sit down, sit down."
+          ],
+          why: "Do not accidentally train students that standing up gets faster attention."
+        },
+        {
+          id: "language",
+          num: "03",
+          title: "Use school-appropriate language.",
+          side: "Phase 2",
+          hook: "Frustration is allowed. Profanity is not. Name it, restate, move on.",
+          studentSteps: [
+            "Pause before speaking.",
+            "Use school-appropriate words.",
+            "If profanity comes out, restate the message appropriately."
+          ],
+          teacherScript: "In this room, frustration is allowed. Profanity is not. If the wrong word comes out, you will pause and say it again the school way.",
+          frame: "Make the response more regulated than the language that triggered it. Respond to the bodily signal, no character lectures.",
+          dontSay: [
+            "How dare you speak to me that way!",
+            "Do you kiss your mother with that mouth?"
+          ],
+          replacementPhrases: [
+            "I am frustrated.",
+            "Can you help me?",
+            "I need a minute."
+          ],
+          why: "Profanity is fast and emotional. Your job is to be the calmest thing in the room."
+        }
+      ],
+      ladders: {
+        seats: {
+          title: "Assigned seat refusal",
+          rungs: [
+            { if: "Student questions the seat once.", then: "\"That is your seat. Go there now.\"", escalate: false },
+            { if: "Student refuses and remains standing.", then: "\"You may go to your seat now, or I will follow the next school step.\"", escalate: true },
+            { if: "Student eventually complies.", then: "Do not add a lecture. Return to instruction.", escalate: false }
+          ]
+        },
+        seated: {
+          title: "Out of seat",
+          rungs: [
+            { if: "Student stands for non-emergency.", then: "\"Back to your seat.\" or \"Seat. Now.\"", escalate: false },
+            { if: "Student walks to you to show work.", then: "\"Return to your seat. I will come to you.\"", escalate: false },
+            { if: "Several students start moving.", then: "\"Freeze. Back to seats in 3, 2, 1.\" Reset procedure.", escalate: true }
+          ]
+        },
+        language: {
+          title: "Profanity",
+          rungs: [
+            { if: "Student blurts profanity from frustration.", then: "\"Language. Try again.\"", escalate: false },
+            { if: "Student restates appropriately.", then: "Move on. No lecture.", escalate: false },
+            { if: "Profanity directed at another.", then: "\"Stop. That language is not okay. Move to the reset seat.\"", escalate: true }
+          ]
+        }
+      },
+      arrival: [
+        { time: "-5 min", title: "Before students arrive", body: "Post the Do Now where it's visible. Post seating chart." },
+        { time: "00:00", title: "Greet at the threshold", body: "\"Good morning. Find your assigned seat. Do Now on the board.\"" },
+        { time: "01:00", title: "Circulate", body: "Nod at students working. Direct stragglers: \"Assigned seat. Now.\"" },
+        { time: "03:00", title: "Launch the Do Now", body: "\"Eyes here in 3, 2, 1. You should be seated with your Do Now started.\"" }
+      ],
+      days: [
+        {
+          num: 1, label: "Day 01", focus: "Reveal the expectation clearly.",
+          actions: ["Teach expectations directly.", "Practice entry twice.", "Correct out-of-seat immediately."],
+          script: "Today we are resetting how this room works so learning can happen faster.",
+          reflectPrompts: ["Who still resisted assigned seats?", "Which script felt easiest?"]
+        },
+        {
+          num: 2, label: "Day 02", focus: "Resist the urge to over-explain.",
+          actions: ["Run the door script with no changes.", "Follow through strongly on staying seated."],
+          script: "Today the goal is faster entry and fewer reminders. Show me you know the routine.",
+          reflectPrompts: ["Where did the routine break?", "Did you stay under 10 words per correction?"]
+        },
+        {
+          num: 3, label: "Day 03", focus: "Reflect on the routine's strength.",
+          actions: ["Reduce reminders.", "Monitor independent starts."],
+          script: "By now, you know the system. Show it.",
+          reflectPrompts: ["How many began without prompting?", "What still requires too much talking?"]
+        },
+        {
+          num: 4, label: "Day 04", focus: "Watch it hold.",
+          actions: ["Run entry with almost no reminders.", "Notice students needing individual support."],
+          script: "Today I am watching what this class can do without extra reminders.",
+          reflectPrompts: ["Is the system holding? If not, tighten consistency, not words."]
+        }
+      ],
+      scenarios: [
+        {
+          id: "s1", ladder: "seats", setup: "A student walks in and loudly announces:", studentSays: "\"Nah, this ain't my seat. I'm sittin' with Jayden.\"",
+          choices: [
+            { text: "\"I explained yesterday why I moved everyone. Just trust me.\"", correct: false, feedback: "Explaining invites debate." },
+            { text: "\"That is your seat. Go there now.\"", correct: true, feedback: "Name + direction + timeframe. Core pattern." }
+          ]
+        },
+        {
+          id: "s3", ladder: "language", setup: "A student slams their pencil down and says:", studentSays: "\"This is stupid as hell.\"",
+          choices: [
+            { text: "\"Excuse me? We do not speak that way.\"", correct: false, feedback: "Matches their intensity." },
+            { text: "\"Language. Try again with school words.\"", correct: true, feedback: "Light cue, clear redirect." }
+          ]
+        }
+      ],
+      trauma: [
+        { title: "Shutdown (freeze)", summary: "Student goes silent. Nervous system hit the brakes.", strategy: "Use proximity without pressure. Circle back.", watch: "Slouching, sudden quiet." },
+        { title: "Escalation (fight)", summary: "Volume rises, body tenses.", strategy: "Lower volume. Give a choice, not an ultimatum.", watch: "Jaw set, fast breathing." }
+      ],
+      panicScripts: [
+        { label: "Room is loud", script: "Freeze. Back to seats in 3, 2, 1." },
+        { label: "Profanity", script: "Language. Try again with school words." },
+        { label: "Student won't sit", script: "That is your seat. Go there now." }
+      ]
+    };
+
+    const state = { screen: "desk", trackId: "seats", ladderId: "seats", scenarioIndex: 0, selectedChoiceIndex: null, selectedDay: 1, panicOpen: false };
+    let progress = JSON.parse(localStorage.getItem("r3apProgress") || "{}");
+    let reflections = JSON.parse(localStorage.getItem("r3apReflections") || "[]");
+
+    const appRoot = document.getElementById("app");
+
+    function save() { localStorage.setItem("r3apProgress", JSON.stringify(progress)); localStorage.setItem("r3apReflections", JSON.stringify(reflections)); }
+    function getRecord(day) { return progress[day] || { actions: [], reflection: "" }; }
+
+    function render() {
+      appRoot.innerHTML = `
+        <div class="shell">
+          ${renderHeader()}
+          <main class="main-shell">${renderScreen()}</main>
+          <button class="panic-fab" data-action="open-panic"><span>R³ Reset</span></button>
+          ${state.panicOpen ? renderPanic() : ""}
+        </div>
+      `;
+    }
+
+    function renderHeader() {
+      const navItems = [
+        { s: "desk", l: "The Studio" }, { s: "equalizer", l: "Equalizer" }, { s: "ladders", l: "In The Booth" },
+        { s: "practice", l: "Sessions" }, { s: "rollout", l: "Rollout" }
+      ];
+      return `
+        <header class="topbar">
+          <div class="topbar-inner">
+            <div class="brand-lockup">
+              <div class="brand-dot"></div>
+              <div class="brand-text">
+                <div class="brand-title">R³.A.P. Agency</div>
+                <div class="brand-sub">Bright Studio</div>
+              </div>
+            </div>
+            <nav class="nav-row">
+              ${navItems.map(i => `<button class="nav-button ${state.screen === i.s ? 'is-active' : ''}" data-action="goto" data-target="${i.s}">${i.l}</button>`).join('')}
+            </nav>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderScreen() {
+      if (state.screen === "track") return renderTrack();
+      if (state.screen === "equalizer") return renderEqualizer();
+      if (state.screen === "ladders") return renderLadders();
+      if (state.screen === "practice") return renderPractice();
+      if (state.screen === "rollout") return renderRollout();
+      if (state.screen === "arrival") return renderArrival();
+      if (state.screen === "trauma") return renderTrauma();
+      return renderDesk();
+    }
+
+    function renderDesk() {
+      return `
+        <section class="screen">
+          <div class="hero-card">
+            <div>
+              <div class="eyebrow">Teacher-Ready Playbook</div>
+              <h1 class="display">R³.A.P. Studio</h1>
+              <h2 class="hero-headline">Grounded coaching for establishing classroom rhythm, focusing on present-moment signals.</h2>
+              <p class="hero-copy">Rhythm requires structure. Establish clear moves to build a predictable, safe classroom environment without excavating origin stories.</p>
+              <div class="chip-row">
+                <span class="chip">Grade 5 Rollout</span>
+                <span class="chip">Present-Moment Focus</span>
+              </div>
+              <div class="hero-actions">
+                <button class="button-primary" data-action="goto" data-target="rollout">Open Today's Rollout</button>
+                <button class="button-secondary" data-action="goto" data-target="equalizer">Equalizer</button>
+              </div>
+            </div>
+            <div class="hero-note">
+              <div class="mini-kicker">Coach's Note</div>
+              <p>Teacher tone: calm, clear, and regulated. If the room is not improving, tighten consistency instead of adding more words.</p>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Priority Expectations</div>
+              <h2 class="section-title">The 3 Tracks</h2>
+            </div>
+            <p class="section-copy">Core routines to establish safety, predictability, and rhythm in your classroom.</p>
+          </div>
+          <div class="grid-three">
+            ${data.expectations.map(i => `
+              <div class="track-card">
+                <span class="track-card-meta">${i.side}</span>
+                <h3>${i.title}</h3>
+                <p>${i.hook}</p>
+                <button class="card-link" data-action="open-track" data-id="${i.id}">Open Track →</button>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Fast Support</div>
+              <h2 class="section-title">Quick Paths</h2>
+            </div>
+            <p class="section-copy">When the room moves faster than your plan, lean on these present-moment tools.</p>
+          </div>
+          <div class="grid-four">
+            <div class="quick-card cursor" data-action="goto" data-target="ladders"><span class="card-kicker">Ladders</span><h3>In The Booth</h3><p>If-then response chains.</p></div>
+            <div class="quick-card cursor" data-action="goto" data-target="practice"><span class="card-kicker">Sessions</span><h3>Practice</h3><p>Rehearse classroom moments.</p></div>
+            <div class="quick-card cursor" data-action="goto" data-target="arrival"><span class="card-kicker">Threshold</span><h3>Studio Entry</h3><p>The first 10 minutes.</p></div>
+            <div class="quick-card cursor" data-action="goto" data-target="trauma"><span class="card-kicker">Lens</span><h3>Trauma Lens</h3><p>Read the nervous system.</p></div>
+          </div>
+
+          <div class="spotlight">
+            <div>
+              <div class="eyebrow" style="border-color:var(--paper); color:var(--paper)">Hopeful Destination</div>
+              <h2 class="display">PLURAL</h2>
+              <p>The mastered flow. The room feels safer. The teacher sounds steadier. Students know what to do before the second reminder ever arrives. Shift from survival mode to a steadier, chosen rhythm.</p>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderTrack() {
+      const item = data.expectations.find(e => e.id === state.trackId);
+      return `
+        <section class="screen">
+          <button class="back-link" data-action="goto" data-target="desk">← Back to Studio</button>
+          <div class="section-head" style="margin-bottom:0; border:none;">
+            <div>
+              <div class="eyebrow">Track ${item.num}</div>
+              <h1 class="display">${item.title}</h1>
+              <p class="section-copy" style="margin-top:16px">${item.why}</p>
+            </div>
+          </div>
+          <div class="grid-two">
+            <div class="panel">
+              <div class="eyebrow">Student Steps</div>
+              <ul>${item.studentSteps.map(s => `<li>${s}</li>`).join('')}</ul>
+            </div>
+            <div class="script-card">
+              <span class="script-label">Teacher Script</span>
+              <div class="script-quote">"${item.teacherScript}"</div>
+              <p style="margin-top:24px; font-size:0.9rem; opacity:0.8">${item.frame}</p>
+            </div>
+          </div>
+          <div class="danger-card">
+            <div class="eyebrow">Traps to Avoid</div>
+            <ul>${item.dontSay.map(s => `<li>${s}</li>`).join('')}</ul>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderEqualizer() {
+      return `
+        <section class="screen">
+          <div class="formula-hero">
+            <div class="eyebrow" style="color:var(--paper); border-color:var(--paper);">Equalizer</div>
+            <h1 class="display">Check Your Levels</h1>
+            <p style="font-size:1.2rem; max-width:60ch; margin:24px auto;">Calm language keeps the room from borrowing your stress. This is the fast formula that keeps you regulated and the message clear.</p>
+            <div class="formula-line">
+              <div class="formula-token">Name</div> + <div class="formula-token">Direction</div> + <div class="formula-token">Timeframe</div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderLadders() {
+      const l = data.ladders[state.ladderId];
+      return `
+        <section class="screen">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">In The Booth</div>
+              <h1 class="display">Response Ladders</h1>
+            </div>
+          </div>
+          <div class="pill-tabs">
+            ${Object.keys(data.ladders).map(k => `<button class="pill-tab ${state.ladderId === k ? 'is-active' : ''}" data-action="set-ladder" data-id="${k}">${data.ladders[k].title}</button>`).join('')}
+          </div>
+          <div class="ladder">
+            ${l.rungs.map((r, i) => `
+              <div class="ladder-rung" style="${r.escalate ? 'border-left: 4px solid var(--accent)' : ''}">
+                <div class="ladder-number">${i+1}</div>
+                <div><div class="ladder-label">If</div><div>${r.if}</div></div>
+                <div><div class="ladder-label">Then</div><div>${r.then}</div></div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderPractice() {
+      const s = data.scenarios[state.scenarioIndex];
+      return `
+        <section class="screen">
+          <div class="scenario-card">
+            <div class="eyebrow">Practice Sessions</div>
+            <h2 class="section-title">Scenario ${state.scenarioIndex + 1}</h2>
+            <p class="scenario-setup">${s.setup}</p>
+            <div class="scenario-student"><strong>Student: </strong>${s.studentSays}</div>
+            <div>
+              ${s.choices.map((c, i) => {
+                const isSel = state.selectedChoiceIndex === i;
+                const isAns = state.selectedChoiceIndex !== null;
+                const cls = isAns && c.correct ? "is-correct" : (isAns && isSel && !c.correct ? "is-wrong" : "");
+                return `
+                  <button class="choice-button ${cls}" data-action="pick" data-idx="${i}">
+                    <div class="choice-key">${String.fromCharCode(65+i)}</div>
+                    <div>
+                      <div style="font-size:1.1rem; font-weight:500;">${c.text}</div>
+                      ${isAns && (isSel || c.correct) ? `<div style="margin-top:8px; color:var(--ink-soft); font-size:0.9rem;">↳ ${c.feedback}</div>` : ''}
+                    </div>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            <div style="margin-top:24px; display:flex; gap:16px;">
+              <button class="button-ghost" data-action="reset-scen">Reset</button>
+              <button class="button-primary" data-action="next-scen">Next Scenario</button>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderRollout() {
+      const d = data.days.find(x => x.num === state.selectedDay);
+      const rec = getRecord(d.num);
+      return `
+        <section class="screen">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Implementation</div>
+              <h1 class="display">4-Day Tracker</h1>
+            </div>
+            <p class="section-copy">Reveal. Resist. Reflect. Watch it hold.</p>
+          </div>
+          <div class="pill-tabs">
+            ${data.days.map(x => `<button class="pill-tab ${state.selectedDay === x.num ? 'is-active' : ''}" data-action="set-day" data-id="${x.num}">${x.label}</button>`).join('')}
+          </div>
+          <div class="grid-two">
+            <div class="panel">
+              <h2 style="margin-bottom:24px;">${d.focus}</h2>
+              <div class="script-card" style="margin: 0 0 24px 0; padding: 24px;">
+                <span class="script-label">Today's Script</span>
+                <div class="script-quote">"${d.script}"</div>
+              </div>
+              <div>
+                ${d.actions.map((a, i) => `
+                  <button class="check-row ${rec.actions[i] ? 'is-done' : ''}" data-action="toggle" data-idx="${i}">
+                    <div class="check-box">${rec.actions[i] ? '✓' : ''}</div>
+                    <div class="check-copy">${a}</div>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+            <div class="panel">
+              <div class="eyebrow">Reflect</div>
+              <ul style="margin-bottom:24px;">${d.reflectPrompts.map(p => `<li>${p}</li>`).join('')}</ul>
+              <textarea class="reflection-textarea" id="ref-input" placeholder="Jot present-moment observations here...">${rec.reflection || ""}</textarea>
+              <button class="button-primary" style="margin-top:16px" data-action="save-ref">Save Note</button>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderArrival() {
+      return `
+        <section class="screen">
+          <div class="section-head"><div><div class="eyebrow">Threshold</div><h1 class="display">The First 10 Mins</h1></div></div>
+          <div class="timeline">
+            ${data.arrival.map(a => `
+              <div class="timeline-card">
+                <div class="eyebrow">${a.time}</div>
+                <h3>${a.title}</h3>
+                <p style="color:var(--ink-soft); margin-top:8px;">${a.body}</p>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderTrauma() {
+      return `
+        <section class="screen">
+          <div class="section-head"><div><div class="eyebrow">Trauma Lens</div><h1 class="display">Read The System</h1></div></div>
+          <div class="grid-two">
+            ${data.trauma.map(t => `
+              <div class="panel">
+                <h3 style="margin-bottom:12px">${t.title}</h3>
+                <p style="margin-bottom:16px">${t.summary}</p>
+                <div class="eyebrow">Strategy</div><p>${t.strategy}</p>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderPanic() {
+      return `
+        <div style="position:fixed; inset:0; background:rgba(250,250,250,0.9); z-index:50; padding:40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+          <div style="max-width:600px; width:100%; border:var(--border-thick); background:var(--paper); padding:48px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:var(--border-thick); padding-bottom:24px; margin-bottom:24px;">
+              <div>
+                <div class="eyebrow">R³ Reset</div>
+                <h2 class="display" style="font-size:2.5rem">One Breath.</h2>
+              </div>
+              <button class="button-ghost" style="padding:0; height:auto; text-decoration:none; font-size:2rem;" data-action="close-panic">×</button>
+            </div>
+            ${data.panicScripts.map(p => `
+              <div style="padding:16px; border-left:4px solid var(--accent); background:var(--bg); margin-bottom:16px;">
+                <div class="mini-kicker">${p.label}</div>
+                <div style="font-size:1.2rem; font-weight:500;">"${p.script}"</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    appRoot.addEventListener('click', e => {
+      const t = e.target.closest('[data-action]');
+      if (!t) return;
+      const act = t.dataset.action;
+
+      if (act === "goto") { state.screen = t.dataset.target; window.scrollTo(0,0); render(); }
+      if (act === "open-track") { state.trackId = t.dataset.id; state.screen = "track"; window.scrollTo(0,0); render(); }
+      if (act === "set-ladder") { state.ladderId = t.dataset.id; render(); }
+      if (act === "pick" && state.selectedChoiceIndex === null) { state.selectedChoiceIndex = Number(t.dataset.idx); render(); }
+      if (act === "next-scen") { state.scenarioIndex = (state.scenarioIndex + 1) % data.scenarios.length; state.selectedChoiceIndex = null; render(); }
+      if (act === "reset-scen") { state.selectedChoiceIndex = null; render(); }
+      if (act === "set-day") { state.selectedDay = Number(t.dataset.id); render(); }
+      if (act === "toggle") { 
+        let r = getRecord(state.selectedDay); 
+        r.actions[t.dataset.idx] = !r.actions[t.dataset.idx]; 
+        progress[state.selectedDay] = r; save(); render(); 
+      }
+      if (act === "save-ref") {
+        let r = getRecord(state.selectedDay);
+        r.reflection = document.getElementById('ref-input').value;
+        progress[state.selectedDay] = r; save(); render();
+      }
+      if (act === "open-panic") { state.panicOpen = true; render(); }
+      if (act === "close-panic") { state.panicOpen = false; render(); }
+    });
+
+    render();
+  </script>
 </body>
 </html>
